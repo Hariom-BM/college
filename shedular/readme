@@ -1,0 +1,75 @@
+Daily Motivational Thought for Slack 🚀
+This is a small Node.js project that generates a new and inspiring motivational thought every morning and sends it to your Slack channel. It uses the Google Gemini API to generate the thoughts, making each message unique.
+
+💡 Why was this built?
+This project is an excellent practice for a junior developer to learn about:
+
+How to work with APIs.
+
+Server-side scripting in Node.js.
+
+Integrating with external applications using Slack Webhooks.
+
+Understanding automation and scheduling (e.g., Cron Jobs).
+
+⚙️ Setup and Installation
+To run this project, you need to follow a few simple steps.
+
+1. Get the Slack Webhook URL
+Go to the Slack API Website.
+
+Create a new Slack app.
+
+In your app's dashboard, enable Incoming Webhooks.
+
+Click on "Add New Webhook to Workspace" and choose the channel where you want to send the messages.
+
+Copy the Webhook URL.
+
+2. Get the Google Generative AI API Key
+You will need an API key if you are running this project on your local computer.
+
+Go to the Google Cloud Console.
+
+Create a new project (or select an existing one).
+
+Enable the "Generative Language API".
+
+In the "Credentials" section, create a new API key.
+
+3. Run the Project
+Create the project file (e.g., motivator.js).
+
+In your terminal, run this command to install the Axios library:
+
+npm install axios
+
+In your motivator.js file, update the slackWebhookUrl and API_KEY:
+
+const slackWebhookUrl = "Your Slack Webhook URL";
+const API_KEY = "Your Google API Key"; // Only for local use
+
+Run the script:
+
+node motivator.js
+
+📅 How to Schedule the Script
+To have the script run automatically every morning, you can use your operating system's scheduling tool.
+
+On Linux/macOS: Cron Job
+In the terminal, run crontab -e and add this line (adjust your path accordingly):
+
+0 10 * * * /usr/bin/node /path/to/your/script/motivator.js
+
+On Windows: Task Scheduler
+Use the Task Scheduler to create a new task that runs the node motivator.js command every morning at 10:00 AM.
+
+👨‍💻 Contribution
+If you would like to improve this project, please submit a pull request. New ideas, bug fixes, or suggestions to improve the code are welcome!
+
+
+for API
+https://console.cloud.google.com/apis/credentials?inv=1&invt=Ab56mw&project=messagelogger-466017
+
+for slack api
+https://api.slack.com/apps/A09B4UE5FL6/incoming-webhooks?success=1

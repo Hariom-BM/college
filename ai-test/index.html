@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>DeepSeek-powered Code/Regex Generator</title>
+  <style>
+    body { font-family: Arial; max-width: 600px; margin: 2em auto; }
+    textarea, pre { width: 100%; padding: 10px; margin: 10px 0; }
+    button { padding: 10px 20px; }
+  </style>
+</head>
+<body>
+  <h2>AI Code / Regex Generator using DeepSeek</h2>
+  <textarea id="prompt" placeholder="Type something (e.g. regex for phone numbers)..."></textarea>
+  <button onclick="callDeepSeek()"> Generate </button>
+  <pre id="result">Result will appear here...</pre>
+
+  <script> 
+
+  async function callDeepSeek() {
+    const prompt = document.getElementById('prompt').value;
+    const resultEl = document.getElementById('result');
+    resultEl.textContent = 'Generating...';
+
+    try {
+      const res = await fetch('https://api.deepseek.com/v1/chat/completions', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer sk-665f912da9064fadbb77f35fbe95999e' // Replace with a valid key
+        },
+        body: JSON.stringify({
+          model: 'deepseek-coder',
+          messages: [{ role: 'user', content: prompt }],
+          temperature: 0.7
+        })
+      });
+
+      if (!res.ok) {
+        throw new Error(`API Error: ${res.status} ${res.statusText}`);
+      }
+
+      const data = await res.json();
+      
+      // Debug: Log full response
+      console.log("API Response:", data); 
+
+      // Safer response handling
+      const reply = data?.choices?.[0]?.message?.content 
+                  || data?.message 
+                  || "No valid response structure";
+      
+      resultEl.textContent = reply;
+
+    } catch (error) {
+      resultEl.textContent = `Error: ${error.message}`;
+      console.error("API Call Failed:", error);
+    }
+  }
+</script>  
+
+</body>
+</html>
