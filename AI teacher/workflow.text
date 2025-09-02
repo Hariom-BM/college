@@ -1,0 +1,88 @@
+
+
+
+
+##    **Project Summary: AI Teacher RAG System**
+
+### **🎯 Main Purpose:**
+This is a **RAG (Retrieval-Augmented Generation) AI Teacher System** that helps students learn by:
+- Converting text lesson files into searchable chunks
+- Using AI to answer questions based on course materials
+- Providing intelligent tutoring with source citations
+
+### **🏗️ Architecture & How It Works:**
+
+1. **Text Processing Pipeline:**
+   - Raw `.txt` files → Clean text → Split into chunks (2500 chars with 300 char overlap)
+   - Each chunk gets converted to vector embeddings using AI models
+   - Stored in PostgreSQL database with pgvector extension
+
+2. **AI Integration:**
+   - Supports both **OpenAI** and **Google Gemini** models
+   - Uses embeddings for semantic search
+   - Generates contextual answers based on retrieved chunks
+
+3. **Database Structure:**
+   - `doc_chunks` table stores text chunks with vector embeddings
+   - Vector similarity search for finding relevant content
+   - Supports scoped searches (specific lessons/courses)
+
+### **📁 Key Components:**
+
+- **`src/`**: Core backend logic (RAG, embeddings, database, server)
+- **`scripts/ingest.js`**: Converts text files to database chunks
+- **`public/`**: Web chat interface for students
+- **`data/raw/`**: Input lesson files (JavaScript tutorials, etc.)
+- **`sql/schema.sql`**: Database structure with vector support
+
+### **   Main Workflow:**
+1. Put lesson files in `data/raw/`
+2. Run `npm run ingest` to process and embed
+3. Start server with `npm run dev`
+4. Students ask questions via web interface
+5. System finds relevant chunks and generates AI answers
+
+---
+
+
+
+## 📊 **Text to Table Conversion Process**
+
+Regarding your question about how main text files are converted to tables, here's the process:
+
+### **🔄 Text Processing Flow:**
+
+1. **File Reading**: System reads `.txt` files from `data/raw/` directory
+2. **Text Cleaning**: Removes extra whitespace, zero-width characters
+3. **Chunking**: Splits text into 2500-character chunks with 300-character overlap
+4. **Embedding**: Each chunk gets converted to vector embeddings using AI models
+5. **Database Storage**: Chunks stored in `doc_chunks` table with:
+   - `source_id`: File name (e.g., "javascript-basics")
+   - `chunk_id`: Unique identifier for each chunk
+   - `text`: The actual text content
+   - `embedding`: Vector representation for similarity search
+   - `start_offset` & `end_offset`: Position in original file
+
+### **🗄️ Database Schema:**
+```sql
+CREATE TABLE doc_chunks (
+  id BIGSERIAL PRIMARY KEY,
+  source_id TEXT,              -- File name
+  chunk_id TEXT UNIQUE,        -- Unique chunk ID
+  text TEXT,                   -- Text content
+  tags TEXT[],                 -- Optional tags
+  start_offset INT,            -- Start position
+  end_offset INT,              -- End position
+  embedding vector(1536)       -- AI-generated vector
+);
+```
+
+### **🔍 How It Works:**
+- When a student asks a question, the system:
+  1. Converts the question to embeddings
+  2. Searches for similar chunks using vector similarity
+  3. Retrieves the most relevant text chunks
+  4. Uses AI to generate an answer based on those chunks
+  5. Provides source citations with chunk references
+
+This creates a powerful learning system where students can ask questions and get AI-generated answers based on the actual course materials, with proper source attribution!

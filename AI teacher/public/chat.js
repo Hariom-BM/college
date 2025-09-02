@@ -4,9 +4,18 @@ class ChatWidget {
         this.sendButton = document.getElementById('sendButton');
         this.chatMessages = document.getElementById('chatMessages');
         this.typingIndicator = document.getElementById('typingIndicator');
+        this.voiceButton = document.getElementById('voiceButton');
+        this.voiceStatus = document.getElementById('voiceStatus');
+        this.voiceText = document.getElementById('voiceText');
+        this.globalStopButton = document.getElementById('globalStopButton');
         
         this.isTyping = false;
         this.apiUrl = '/ask'; // Use relative URL to avoid CORS issues
+        
+        // Voice recognition properties
+        this.recognition = null;
+        this.isListening = false;
+        this.currentUtterance = null;
         
         this.init();
     }
@@ -24,13 +33,116 @@ class ChatWidget {
             this.sendButton.disabled = !this.messageInput.value.trim();
         });
         
+        // Keyboard shortcuts
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                this.stopAllVoice();
+            }
+        });
+        
+        // Initialize voice recognition
+        this.initSpeechRecognition();
+        
+        // Voice button event listener
+        this.voiceButton.addEventListener('click', () => this.toggleVoice());
+        
+        // Global stop button event listener
+        this.globalStopButton.addEventListener('click', () => this.stopAllVoice());
+        
         // Initial state
         this.sendButton.disabled = true;
+    }
+    
+    // Voice Recognition Methods
+    initSpeechRecognition() {
+        if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
+            const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+            this.recognition = new SpeechRecognition();
+            
+            this.recognition.continuous = false;
+            this.recognition.interimResults = true;
+            this.recognition.lang = 'en-US'; // Can be changed to 'hi-IN' for Hindi
+            
+            this.recognition.onstart = () => {
+                this.isListening = true;
+                this.voiceButton.classList.add('recording');
+                this.voiceStatus.style.display = 'flex';
+                this.voiceText.textContent = 'Listening...';
+                this.updateGlobalStopButton();
+            };
+            
+            this.recognition.onresult = (event) => {
+                let finalTranscript = '';
+                let interimTranscript = '';
+                
+                for (let i = event.resultIndex; i < event.results.length; i++) {
+                    const transcript = event.results[i][0].transcript;
+                    if (event.results[i].isFinal) {
+                        finalTranscript += transcript;
+                    } else {
+                        interimTranscript += transcript;
+                    }
+                }
+                
+                if (finalTranscript) {
+                    this.messageInput.value = finalTranscript;
+                    this.voiceText.textContent = `Heard: "${finalTranscript}"`;
+                    this.sendButton.disabled = false;
+                } else if (interimTranscript) {
+                    this.voiceText.textContent = `Hearing: "${interimTranscript}"`;
+                }
+            };
+            
+            this.recognition.onerror = (event) => {
+                console.error('Speech recognition error:', event.error);
+                this.voiceText.textContent = `Error: ${event.error}`;
+                this.stopListening();
+                this.updateGlobalStopButton();
+            };
+            
+            this.recognition.onend = () => {
+                this.stopListening();
+                this.updateGlobalStopButton();
+            };
+            
+        } else {
+            console.error('Speech recognition not supported');
+            this.voiceButton.style.display = 'none';
+        }
+    }
+    
+    toggleVoice() {
+        if (this.isListening) {
+            this.stopListening();
+        } else {
+            this.startListening();
+        }
+    }
+    
+    startListening() {
+        if (this.recognition && !this.isListening) {
+            this.recognition.start();
+        }
+    }
+    
+    stopListening() {
+        if (this.recognition && this.isListening) {
+            this.recognition.stop();
+            this.isListening = false;
+            this.voiceButton.classList.remove('recording');
+            this.voiceStatus.style.display = 'none';
+            this.updateGlobalStopButton();
+        }
     }
     
     async sendMessage() {
         const message = this.messageInput.value.trim();
         if (!message || this.isTyping) return;
+        
+        // Stop listening if active
+        if (this.isListening) {
+            this.stopListening();
+        }
         
         // Add user message
         this.addMessage(message, 'user');
@@ -123,6 +235,28 @@ class ChatWidget {
         answerParagraph.textContent = response.answer || 'No answer received';
         contentDiv.appendChild(answerParagraph);
         
+        // Add voice control buttons
+        const voiceControlsDiv = document.createElement('div');
+        voiceControlsDiv.className = 'voice-controls';
+        
+        // Add speak button for AI response
+        const speakButton = document.createElement('button');
+        speakButton.className = 'speak-button';
+        speakButton.innerHTML = '🔊';
+        speakButton.title = 'Listen to this response';
+        speakButton.onclick = () => this.speakText(response.answer || 'No answer received');
+        voiceControlsDiv.appendChild(speakButton);
+        
+        // Add stop button
+        const stopButton = document.createElement('button');
+        stopButton.className = 'stop-button';
+        stopButton.innerHTML = '⏹️';
+        stopButton.title = 'Stop listening';
+        stopButton.onclick = () => this.stopSpeaking();
+        voiceControlsDiv.appendChild(stopButton);
+        
+        contentDiv.appendChild(voiceControlsDiv);
+        
         // Add sources if available
         if (response.sources && response.sources.length > 0) {
             const sourcesDiv = document.createElement('div');
@@ -148,6 +282,74 @@ class ChatWidget {
         this.chatMessages.appendChild(messageDiv);
         
         this.scrollToBottom();
+    }
+    
+    // Text-to-Speech functionality
+    speakText(text) {
+        if ('speechSynthesis' in window) {
+            // Stop any ongoing speech first
+            this.stopSpeaking();
+            
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = 'en-US'; // Can be changed to 'hi-IN' for Hindi
+            utterance.rate = 0.9; // Slightly slower for better understanding
+            utterance.pitch = 1;
+            utterance.volume = 1;
+            
+            // Try to use a female voice if available
+            const voices = window.speechSynthesis.getVoices();
+            const femaleVoice = voices.find(voice => voice.name.includes('Female') || voice.name.includes('Samantha'));
+            if (femaleVoice) {
+                utterance.voice = femaleVoice;
+            }
+            
+            // Store current utterance for stopping
+            this.currentUtterance = utterance;
+            
+            // Add event listeners
+            utterance.onend = () => {
+                this.currentUtterance = null;
+                this.updateVoiceButtons(false);
+                this.updateGlobalStopButton();
+            };
+            
+            utterance.onerror = () => {
+                this.currentUtterance = null;
+                this.updateVoiceButtons(false);
+                this.updateGlobalStopButton();
+            };
+            
+            window.speechSynthesis.speak(utterance);
+            this.updateVoiceButtons(true);
+            this.updateGlobalStopButton();
+        } else {
+            console.error('Text-to-speech not supported');
+        }
+    }
+    
+    // Stop speaking functionality
+    stopSpeaking() {
+        if ('speechSynthesis' in window) {
+            window.speechSynthesis.cancel();
+            this.currentUtterance = null;
+            this.updateVoiceButtons(false);
+            this.updateGlobalStopButton();
+        }
+    }
+    
+    // Update voice control buttons state
+    updateVoiceButtons(isSpeaking) {
+        const speakButtons = document.querySelectorAll('.speak-button');
+        const stopButtons = document.querySelectorAll('.stop-button');
+        
+        speakButtons.forEach(btn => {
+            btn.disabled = isSpeaking;
+            btn.style.opacity = isSpeaking ? '0.5' : '1';
+        });
+        
+        stopButtons.forEach(btn => {
+            btn.style.display = isSpeaking ? 'inline-flex' : 'none';
+        });
     }
     
     addErrorMessage(errorMessage) {
@@ -184,6 +386,26 @@ class ChatWidget {
         setTimeout(() => {
             this.chatMessages.scrollTop = this.chatMessages.scrollHeight;
         }, 100);
+    }
+    
+    // Stop all voice activities
+    stopAllVoice() {
+        // Stop speech synthesis
+        this.stopSpeaking();
+        
+        // Stop voice recognition if active
+        if (this.isListening) {
+            this.stopListening();
+        }
+        
+        // Hide global stop button
+        this.globalStopButton.style.display = 'none';
+    }
+    
+    // Update global stop button visibility
+    updateGlobalStopButton() {
+        const isAnyVoiceActive = this.isListening || this.currentUtterance;
+        this.globalStopButton.style.display = isAnyVoiceActive ? 'flex' : 'none';
     }
 }
 
