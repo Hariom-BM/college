@@ -1,9 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
+<<<<<<< HEAD
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI Teacher RAG System</title>
+=======
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RAG AI Teacher Project - Complete Guide</title>
+>>>>>>> c1b8c95bd17e963c4abb27f0a859ddfe1c014f86
     <style>
         * {
             margin: 0;
@@ -21,13 +29,19 @@
         .presentation-container {
             height: 100vh;
             display: flex;
+<<<<<<< HEAD
             flex-direction: column;
             justify-content: center;
             align-items: center;
+=======
+            align-items: center;
+            justify-content: center;
+>>>>>>> c1b8c95bd17e963c4abb27f0a859ddfe1c014f86
             position: relative;
         }
 
         .slide {
+<<<<<<< HEAD
             display: none;
             width: 90%;
             max-width: 1000px;
@@ -39,10 +53,26 @@
             border-radius: 20px;
             border: 1px solid rgba(255, 255, 255, 0.2);
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+=======
+            width: 95vw;
+            height: 90vh;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(15px);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 60px;
+            display: none;
+            overflow-y: auto;
+            box-shadow: 0 25px 45px rgba(0, 0, 0, 0.2);
+>>>>>>> c1b8c95bd17e963c4abb27f0a859ddfe1c014f86
         }
 
         .slide.active {
             display: block;
+<<<<<<< HEAD
+=======
+            animation: slideIn 0.6s ease-out;
+>>>>>>> c1b8c95bd17e963c4abb27f0a859ddfe1c014f86
         }
 
         @keyframes slideIn {
@@ -50,12 +80,17 @@
                 opacity: 0;
                 transform: translateY(30px);
             }
+<<<<<<< HEAD
+=======
+
+>>>>>>> c1b8c95bd17e963c4abb27f0a859ddfe1c014f86
             to {
                 opacity: 1;
                 transform: translateY(0);
             }
         }
 
+<<<<<<< HEAD
         h1 {
             font-size: 3.5rem;
             margin-bottom: 30px;
@@ -161,6 +196,68 @@
         }
 
         .controls {
+=======
+        .slide h1 {
+            font-size: 3.5rem;
+            text-align: center;
+            margin-bottom: 40px;
+            background: linear-gradient(45deg, #FFD700, #FFA500);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 2px 10px rgba(255, 215, 0, 0.3);
+        }
+
+        .slide h2 {
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            color: #FFE135;
+            border-bottom: 3px solid #FFE135;
+            padding-bottom: 10px;
+        }
+
+        .slide h3 {
+            font-size: 1.8rem;
+            margin: 25px 0 15px 0;
+            color: #87CEEB;
+        }
+
+        .slide p,
+        .slide li {
+            font-size: 1.3rem;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .slide ul {
+            margin-left: 30px;
+            margin-bottom: 25px;
+        }
+
+        .slide li {
+            margin-bottom: 10px;
+        }
+
+        .highlight {
+            background: linear-gradient(45deg, #FF6B6B, #4ECDC4);
+            padding: 20px;
+            border-radius: 15px;
+            margin: 25px 0;
+            border-left: 5px solid #FFE135;
+        }
+
+        .code-block {
+            background: rgba(0, 0, 0, 0.4);
+            padding: 20px;
+            border-radius: 10px;
+            font-family: 'Courier New', monospace;
+            margin: 20px 0;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            overflow-x: auto;
+        }
+
+        .navigation {
+>>>>>>> c1b8c95bd17e963c4abb27f0a859ddfe1c014f86
             position: fixed;
             bottom: 30px;
             left: 50%;
@@ -170,6 +267,7 @@
             z-index: 1000;
         }
 
+<<<<<<< HEAD
         .btn {
             padding: 12px 25px;
             background: rgba(255, 255, 255, 0.2);
@@ -190,6 +288,27 @@
         }
 
         .btn:disabled {
+=======
+        .nav-btn {
+            padding: 12px 25px;
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            border-radius: 25px;
+            color: white;
+            font-size: 1.1rem;
+            cursor: pointer;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .nav-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.05);
+        }
+
+        .nav-btn:disabled {
+>>>>>>> c1b8c95bd17e963c4abb27f0a859ddfe1c014f86
             opacity: 0.5;
             cursor: not-allowed;
         }
@@ -200,6 +319,7 @@
             right: 30px;
             background: rgba(255, 255, 255, 0.2);
             padding: 10px 20px;
+<<<<<<< HEAD
             border-radius: 20px;
             backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.2);
@@ -269,11 +389,98 @@
                 <div class="tech-badge">PostgreSQL</div>
                 <div class="tech-badge">OpenAI/Gemini</div>
                 <div class="tech-badge">RAG</div>
+=======
+            border-radius: 25px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            z-index: 1000;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin: 20px 0;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+        }
+
+        .emoji {
+            font-size: 2rem;
+            margin-right: 15px;
+        }
+
+        .process-step {
+            display: flex;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 15px;
+            margin: 15px 0;
+            border-left: 5px solid #4ECDC4;
+        }
+
+        .step-number {
+            background: linear-gradient(45deg, #FF6B6B, #4ECDC4);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-right: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="slide-counter">
+        <span id="currentSlide">1</span> / <span id="totalSlides">15</span>
+    </div>
+
+    <div class="presentation-container">
+        <!-- Slide 1: Title -->
+        <div class="slide active">
+            <h1>🤖 RAG AI Teacher Project</h1>
+            <div class="highlight">
+                <h2>Retrieval-Augmented Generation</h2>
+                <p style="font-size: 1.5rem; text-align: center;">0 से Hero तक Complete Guide</p>
+            </div>
+            <div class="grid-2" style="margin-top: 40px;">
+                <div class="card">
+                    <h3>🎯 Project Goal</h3>
+                    <p>AI को अपने documents से accurate answers देने के लिए train करना</p>
+                </div>
+                <div class="card">
+                    <h3>🚀 Key Features</h3>
+                    <ul>
+                        <li>Document-based Q&A</li>
+                        <li>Source citations</li>
+                        <li>Real-time chat interface</li>
+                    </ul>
+                </div>
+>>>>>>> c1b8c95bd17e963c4abb27f0a859ddfe1c014f86
             </div>
         </div>
 
         <!-- Slide 2: What is RAG? -->
         <div class="slide">
+<<<<<<< HEAD
             <h2>🧠 What is RAG?</h2>
             <p style="font-size: 1.6rem; margin-bottom: 30px;"><span class="highlight">Retrieval-Augmented Generation</span></p>
             
@@ -289,10 +496,37 @@
                 <div class="feature-card">
                     <h3>✍️ Generation</h3>
                     <p>Creates smart answers based on your lessons</p>
+=======
+            <h2>🔍 What is RAG?</h2>
+            <div class="highlight">
+                <h3><span class="emoji">🧠</span>RAG = Retrieval-Augmented Generation</h3>
+                <p>AI को specific documents से answers generate करने का method</p>
+            </div>
+
+            <div class="grid-2">
+                <div class="card">
+                    <h3>❌ Traditional AI</h3>
+                    <ul>
+                        <li>General knowledge से answers</li>
+                        <li>Hallucination का risk</li>
+                        <li>Outdated information</li>
+                        <li>No source tracking</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3>✅ RAG AI</h3>
+                    <ul>
+                        <li>Your documents से answers</li>
+                        <li>Accurate information</li>
+                        <li>Up-to-date content</li>
+                        <li>Source citations included</li>
+                    </ul>
+>>>>>>> c1b8c95bd17e963c4abb27f0a859ddfe1c014f86
                 </div>
             </div>
         </div>
 
+<<<<<<< HEAD
         <!-- Slide 3: Main Features -->
         <div class="slide">
             <h2>⚡ Key Features</h2>
@@ -335,10 +569,96 @@
                 <div class="step-number">4</div>
                 <div>
                     <strong>Student Asks Question:</strong> AI finds relevant chunks and generates smart answers
+=======
+        <!-- Slide 3: Why RAG? -->
+        <div class="slide">
+            <h2>💡 Why do we need RAG?</h2>
+
+            <div class="grid-2">
+                <div>
+                    <h3>🚨 Problems RAG Solves:</h3>
+                    <div class="process-step">
+                        <span class="emoji">❌</span>
+                        <div>
+                            <strong>AI Hallucination</strong>
+                            <p>AI galat information de sakta hai</p>
+                        </div>
+                    </div>
+                    <div class="process-step">
+                        <span class="emoji">⏰</span>
+                        <div>
+                            <strong>Outdated Knowledge</strong>
+                            <p>AI purane data से answer deta hai</p>
+                        </div>
+                    </div>
+                    <div class="process-step">
+                        <span class="emoji">🔍</span>
+                        <div>
+                            <strong>No Source</strong>
+                            <p>Pata nahi chalta answer kahan se aaya</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <h3>🎯 Real Use Cases:</h3>
+                    <div class="card">
+                        <h4>📚 Education</h4>
+                        <p>Students course materials से questions puch sakte hain</p>
+                    </div>
+                    <div class="card">
+                        <h4>🏢 Business</h4>
+                        <p>Company documents से information find karna</p>
+                    </div>
+                    <div class="card">
+                        <h4>📖 Research</h4>
+                        <p>Papers aur documents से specific information</p>
+                    </div>
                 </div>
             </div>
         </div>
 
+        <!-- Slide 4: How RAG Works -->
+        <div class="slide">
+            <h2>⚙️ How RAG Works?</h2>
+
+            <h3>🔄 Step-by-Step Process:</h3>
+
+            <div class="process-step">
+                <div class="step-number">1</div>
+                <div>
+                    <strong>Document Processing</strong>
+                    <p>Documents → Text Chunks → Embeddings → Database</p>
+                </div>
+            </div>
+
+            <div class="process-step">
+                <div class="step-number">2</div>
+                <div>
+                    <strong>Question Processing</strong>
+                    <p>User Question → Embedding → Vector Search</p>
+                </div>
+            </div>
+
+            <div class="process-step">
+                <div class="step-number">3</div>
+                <div>
+                    <strong>Context Retrieval</strong>
+                    <p>Database से similar chunks retrieve करना</p>
+                </div>
+            </div>
+
+            <div class="process-step">
+                <div class="step-number">4</div>
+                <div>
+                    <strong>Answer Generation</strong>
+                    <p>AI context के साथ accurate answer generate करता है</p>
+>>>>>>> c1b8c95bd17e963c4abb27f0a859ddfe1c014f86
+                </div>
+            </div>
+        </div>
+
+<<<<<<< HEAD
         <!-- Slide 5: Text to Database Process -->
         <div class="slide">
             <h2>📝 Text to Database Conversion</h2>
@@ -412,10 +732,87 @@ Raw Text File → Clean & Split → Vector Embeddings → Database Storage
                         <li>Study material assistance</li>
                         <li>Course content exploration</li>
                         <li>Learning reinforcement</li>
+=======
+        <!-- Slide 5: When to use RAG -->
+        <div class="slide">
+            <h2>🎯 When to use RAG?</h2>
+
+            <div class="grid-2">
+                <div class="card" style="border-left: 5px solid #4ECDC4;">
+                    <h3>✅ Use RAG when:</h3>
+                    <ul>
+                        <li>Aapke paas specific documents hain</li>
+                        <li>Accurate, source-based answers chahiye</li>
+                        <li>Real-time information chahiye</li>
+                        <li>Privacy important hai</li>
+                        <li>Domain-specific knowledge chahiye</li>
+                    </ul>
+                </div>
+
+                <div class="card" style="border-left: 5px solid #FF6B6B;">
+                    <h3>❌ Don't use RAG when:</h3>
+                    <ul>
+                        <li>General questions hain</li>
+                        <li>Real-time data chahiye (weather, stocks)</li>
+                        <li>Simple chatbot chahiye</li>
+                        <li>No specific documents available</li>
+                        <li>Creative writing tasks</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 6: Project Architecture -->
+        <div class="slide">
+            <h2>🏗️ Project Architecture</h2>
+
+            <div class="code-block">
+                📁 Project Structure:
+                ├── 📄 package.json (Dependencies)
+                ├── 📄 .env (API keys & settings)
+                ├── 📂 src/ (Main code)
+                │ ├── 🗄️ db.js (Database connection)
+                │ ├── 🔧 config.js (Settings)
+                │ ├── ✂️ chunk.js (Document cutting)
+                │ ├── 🧠 embed.js (Text to numbers)
+                │ ├── 🤖 rag.js (Main logic)
+                │ └── 🌐 server.js (API server)
+                ├── 📁 public/ (Frontend)
+                │ ├── 🎨 styles.css (Design)
+                │ ├── ⚡ chat.js (Chat functionality)
+                │ └── 📄 index.html (Chat interface)
+                └── 📁 data/ (Your documents)
+            </div>
+        </div>
+
+        <!-- Slide 7: Key Components -->
+        <div class="slide">
+            <h2>🔧 Key Components</h2>
+
+            <div class="grid-2">
+                <div class="card">
+                    <h3>🗄️ Database (PostgreSQL + pgvector)</h3>
+                    <ul>
+                        <li>Document chunks store करता है</li>
+                        <li>Embeddings (numbers) store करता है</li>
+                        <li>Source information track करता है</li>
+                        <li>Vector similarity search</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h3>🧠 Embedding Models</h3>
+                    <ul>
+                        <li><strong>OpenAI:</strong> text-embedding-3-small</li>
+                        <li><strong>Gemini:</strong> embedding-001</li>
+                        <li><strong>Purpose:</strong> Text को numbers में convert</li>
+                        <li><strong>Dimensions:</strong> 1536 / 768</li>
+>>>>>>> c1b8c95bd17e963c4abb27f0a859ddfe1c014f86
                     </ul>
                 </div>
             </div>
 
+<<<<<<< HEAD
             <p style="font-size: 1.5rem; margin-top: 30px; color: #f0f8ff;">
                 <strong>Perfect for educators who want to provide intelligent, always-available learning support!</strong>
             </p>
@@ -448,10 +845,30 @@ Raw Text File → Clean & Split → Vector Embeddings → Database Storage
                 
                 <div style="margin-top: 30px; font-size: 1.2rem; opacity: 0.8;">
                     <p>🌟 Building the future of intelligent education 🌟</p>
+=======
+            <div class="grid-2">
+                <div class="card">
+                    <h3>💬 Chat Models</h3>
+                    <ul>
+                        <li><strong>OpenAI:</strong> gpt-4o-mini, gpt-4o</li>
+                        <li><strong>Gemini:</strong> gemini-1.5-flash</li>
+                        <li><strong>Purpose:</strong> Questions का answer देना</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h3>🔍 Vector Search</h3>
+                    <div class="code-block" style="font-size: 0.9rem;">
+                        SELECT * FROM doc_chunks
+                        ORDER BY embedding <=> '[0.1, 0.2, ...]'
+                            LIMIT 5;
+                    </div>
+>>>>>>> c1b8c95bd17e963c4abb27f0a859ddfe1c014f86
                 </div>
             </div>
         </div>
 
+<<<<<<< HEAD
         <!-- Controls -->
         <div class="controls">
             <button class="btn" id="prev-btn" onclick="changeSlide(-1)">← Previous</button>
@@ -504,6 +921,385 @@ Raw Text File → Clean & Split → Vector Embeddings → Database Storage
                 }, index * 100);
             });
         }, 5000);
+=======
+        <!-- Slide 8: Setup Process -->
+        <div class="slide">
+            <h2>⚡ Setup Process</h2>
+
+            <div class="process-step">
+                <div class="step-number">1</div>
+                <div>
+                    <strong>Environment Setup</strong>
+                    <div class="code-block">
+                        OPENAI_API_KEY=sk-your-key-here
+                        GEMINI_API_KEY=your-gemini-key
+                        DATABASE_URL=postgresql://user:pass@host:port/db
+                    </div>
+                </div>
+            </div>
+
+            <div class="process-step">
+                <div class="step-number">2</div>
+                <div>
+                    <strong>Database Creation</strong>
+                    <div class="code-block">
+                        CREATE EXTENSION vector;
+                        CREATE TABLE doc_chunks (
+                        id BIGSERIAL PRIMARY KEY,
+                        source_id TEXT,
+                        text TEXT,
+                        embedding vector(1536)
+                        );
+                    </div>
+                </div>
+            </div>
+
+            <div class="process-step">
+                <div class="step-number">3</div>
+                <div>
+                    <strong>Content Ingestion & Server Start</strong>
+                    <div class="code-block">
+                        npm run ingest # Documents को process करना
+                        npm run dev # Server start करना
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 9: Usage Guide -->
+        <div class="slide">
+            <h2>📖 How to Use</h2>
+
+            <div class="grid-2">
+                <div>
+                    <h3>📁 Add Your Content</h3>
+                    <div class="code-block">
+                        📁 data/raw/
+                        ├── 📄 lecture1.txt
+                        ├── 📄 lecture2.txt
+                        └── 📄 notes.txt
+                    </div>
+
+                    <h3>🔄 Ingest Content</h3>
+                    <div class="code-block">
+                        npm run ingest
+                        # This will:
+                        # 1. Read all .txt files
+                        # 2. Cut them into chunks
+                        # 3. Create embeddings
+                        # 4. Store in database
+                    </div>
+                </div>
+
+                <div>
+                    <h3>❓ Ask Questions</h3>
+                    <div class="code-block">
+                        curl -X POST http://localhost:3000/ask \
+                        -H "Content-Type: application/json" \
+                        -d '{"question": "What is AI?", "k": 5}'
+                    </div>
+
+                    <h3>📝 Get Response</h3>
+                    <div class="code-block">
+                        {
+                        "answer": "AI is a branch of...",
+                        "sources": [
+                        {
+                        "source": 1,
+                        "source_id": "lecture1",
+                        "confidence": 0.95
+                        }
+                        ]
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 10: Frontend Interface -->
+        <div class="slide">
+            <h2>💻 Frontend Chat Interface</h2>
+
+            <div class="highlight">
+                <h3>✨ Key Features:</h3>
+            </div>
+
+            <div class="grid-2">
+                <div class="card">
+                    <h4>🎨 Beautiful UI</h4>
+                    <p>Modern gradient design with glassmorphism effects</p>
+                </div>
+                <div class="card">
+                    <h4>💬 Real-time Chat</h4>
+                    <p>Instant responses with typing indicators</p>
+                </div>
+                <div class="card">
+                    <h4>📱 Mobile Responsive</h4>
+                    <p>Phone और tablet pe perfectly chalega</p>
+                </div>
+                <div class="card">
+                    <h4>📚 Source Citations</h4>
+                    <p>Pata chalta hai answer kahan se aaya</p>
+                </div>
+            </div>
+
+            <div class="grid-2" style="margin-top: 30px;">
+                <div class="card">
+                    <h4>Option 1: Vanilla JavaScript</h4>
+                    <ul>
+                        <li>Simple, no build process</li>
+                        <li>Direct HTML/CSS/JS</li>
+                        <li>Easy to customize</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h4>Option 2: React</h4>
+                    <ul>
+                        <li>Advanced component structure</li>
+                        <li>State management</li>
+                        <li>More interactive features</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 11: Common Issues -->
+        <div class="slide">
+            <h2>🐛 Common Issues & Solutions</h2>
+
+            <div class="card" style="border-left: 5px solid #FF6B6B; margin-bottom: 20px;">
+                <h3>Issue 1: Database Connection Error</h3>
+                <div class="code-block">
+                    Error: Cannot read properties of undefined (reading 'searchParams')
+                </div>
+                <p><strong>Solution:</strong> Check DATABASE_URL in .env, make sure database is running</p>
+            </div>
+
+            <div class="card" style="border-left: 5px solid #FF6B6B; margin-bottom: 20px;">
+                <h3>Issue 2: API Key Error</h3>
+                <div class="code-block">
+                    Error: 401 Incorrect API key
+                </div>
+                <p><strong>Solution:</strong> Get valid API key from OpenAI/Gemini, update .env file</p>
+            </div>
+
+            <div class="card" style="border-left: 5px solid #FF6B6B;">
+                <h3>Issue 3: No Content Found</h3>
+                <div class="code-block">
+                    Answer: "I couldn't find this in the course materials"
+                </div>
+                <p><strong>Solution:</strong> Add documents to data/raw/, run npm run ingest</p>
+            </div>
+        </div>
+
+        <!-- Slide 12: Customization -->
+        <div class="slide">
+            <h2>⚙️ Customization Options</h2>
+
+            <div class="grid-2">
+                <div class="card">
+                    <h3>🤖 Change AI Provider</h3>
+                    <div class="code-block">
+                        # .env file mein
+                        AI_PROVIDER=openai # or gemini
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3>🧠 Change Models</h3>
+                    <div class="code-block">
+                        # OpenAI
+                        OPENAI_CHAT_MODEL=gpt-4o-mini
+                        OPENAI_EMBED_MODEL=text-embedding-3-small
+
+                        # Gemini
+                        GEMINI_CHAT_MODEL=gemini-1.5-flash
+                        GEMINI_EMBED_MODEL=embedding-001
+                    </div>
+                </div>
+            </div>
+
+            <div class="card" style="margin-top: 20px;">
+                <h3>🎨 Customize UI</h3>
+                <div class="code-block">
+                    /* styles.css mein colors change karein */
+                    background: linear-gradient(135deg, #your-color1, #your-color2);
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 13: Cost Analysis -->
+        <div class="slide">
+            <h2>💰 Cost Analysis</h2>
+
+            <div class="grid-2">
+                <div class="card">
+                    <h3>💰 OpenAI Costs</h3>
+                    <ul>
+                        <li><strong>Embeddings:</strong> ~$0.0001 per 1K tokens</li>
+                        <li><strong>Chat:</strong> ~$0.002 per 1K tokens</li>
+                        <li><strong>Monthly estimate:</strong> $10-50 for small usage</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h3>💸 Gemini Costs</h3>
+                    <ul>
+                        <li><strong>Embeddings:</strong> Free tier available</li>
+                        <li><strong>Chat:</strong> Free tier available</li>
+                        <li><strong>Monthly estimate:</strong> $0-20 for small usage</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="highlight" style="margin-top: 30px;">
+                <h3>💡 Cost Optimization Tips</h3>
+                <ul>
+                    <li>Use smaller embedding models for lower costs</li>
+                    <li>Optimize chunk sizes to reduce token usage</li>
+                    <li>Implement caching for repeated queries</li>
+                    <li>Start with free tiers and scale gradually</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Slide 14: Advanced Features -->
+        <div class="slide">
+            <h2>🚀 Advanced Features (Future)</h2>
+
+            <div class="grid-3">
+                <div class="card">
+                    <h3>📄 File Upload</h3>
+                    <ul>
+                        <li>PDF support</li>
+                        <li>Word documents</li>
+                        <li>Images with OCR</li>
+                        <li>Excel files</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h3>🎤 Voice Interface</h3>
+                    <ul>
+                        <li>Speech-to-text</li>
+                        <li>Text-to-speech</li>
+                        <li>Voice commands</li>
+                        <li>Audio responses</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h3>🌍 Multi-language</h3>
+                    <ul>
+                        <li>Hindi support</li>
+                        <li>Translation</li>
+                        <li>Localization</li>
+                        <li>Regional languages</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="grid-2" style="margin-top: 30px;">
+                <div class="card">
+                    <h3>🔐 Security & Auth</h3>
+                    <ul>
+                        <li>User authentication</li>
+                        <li>Role-based access</li>
+                        <li>Data encryption</li>
+                        <li>Audit logging</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h3>📊 Analytics</h3>
+                    <ul>
+                        <li>Usage statistics</li>
+                        <li>Performance metrics</li>
+                        <li>User behavior tracking</li>
+                        <li>Cost monitoring</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 15: Summary -->
+        <div class="slide">
+            <h1>🎯 Project Summary</h1>
+
+            <div class="highlight">
+                <h2>Yeh project aapko deta hai:</h2>
+            </div>
+
+            <div class="grid-2">
+                <div class="card">
+                    <h3>🎓 Smart AI Teacher</h3>
+                    <p>Jo aapke documents se accurate answer dega with source citations</p>
+                </div>
+                <div class="card">
+                    <h3>💻 Beautiful UI</h3>
+                    <p>Professional chat interface with modern design</p>
+                </div>
+                <div class="card">
+                    <h3>⚡ Easy Setup</h3>
+                    <p>Simple installation process with clear instructions</p>
+                </div>
+                <div class="card">
+                    <h3>📈 Scalable</h3>
+                    <p>Production-ready architecture that can grow with your needs</p>
+                </div>
+            </div>
+
+            <div class="highlight" style="margin-top: 40px;">
+                <h3>🚀 Next Steps:</h3>
+                <div class="grid-2">
+                    <div>
+                        <ol style="font-size: 1.2rem;">
+                            <li>Database setup करें</li>
+                            <li>API keys configure करें</li>
+                        </ol>
+                    </div>
+                    <div>
+                        <ol style="font-size: 1.2rem;" start="3">
+                            <li>Documents add करें</li>
+                            <li>Test करें aur enjoy करें! 🎉</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="navigation">
+        <button class="nav-btn" id="prevBtn" onclick="changeSlide(-1)">← Previous</button>
+        <button class="nav-btn" id="nextBtn" onclick="changeSlide(1)">Next →</button>
+    </div>
+
+    <script>
+        let currentSlideIndex=0;
+        const slides=document.querySelectorAll('.slide');
+        const totalSlides=slides.length;
+
+        document.getElementById('totalSlides').textContent=totalSlides;
+
+        function showSlide(index) {
+            slides.forEach((slide,i) => {
+                slide.classList.toggle('active',i===index);
+            });
+
+            document.getElementById('currentSlide').textContent=index+1;
+            document.getElementById('prevBtn').disabled=index===0;
+            document.getElementById('nextBtn').disabled=index===totalSlides-1;
+        }
+
+        function changeSlide(direction) {
+            currentSlideIndex+=direction;
+            if(currentSlideIndex<0) currentSlideIndex=0;
+            if(currentSlideIndex>=totalSlides) currentSlideIndex=totalSlides-1;
+            showSlide(currentSlideIndex);
+        }
+
+        showSlide(currentSlideIndex);
+>>>>>>> c1b8c95bd17e963c4abb27f0a859ddfe1c014f86
     </script>
 </body>
 </html>

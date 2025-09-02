@@ -4,19 +4,25 @@ class ChatWidget {
         this.sendButton = document.getElementById('sendButton');
         this.chatMessages = document.getElementById('chatMessages');
         this.typingIndicator = document.getElementById('typingIndicator');
+<<<<<<< HEAD
         this.voiceButton = document.getElementById('voiceButton');
         this.voiceStatus = document.getElementById('voiceStatus');
         this.voiceText = document.getElementById('voiceText');
         this.globalStopButton = document.getElementById('globalStopButton');
+=======
+>>>>>>> c1b8c95bd17e963c4abb27f0a859ddfe1c014f86
         
         this.isTyping = false;
         this.apiUrl = '/ask'; // Use relative URL to avoid CORS issues
         
+<<<<<<< HEAD
         // Voice recognition properties
         this.recognition = null;
         this.isListening = false;
         this.currentUtterance = null;
         
+=======
+>>>>>>> c1b8c95bd17e963c4abb27f0a859ddfe1c014f86
         this.init();
     }
     
@@ -33,6 +39,7 @@ class ChatWidget {
             this.sendButton.disabled = !this.messageInput.value.trim();
         });
         
+<<<<<<< HEAD
         // Keyboard shortcuts
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape') {
@@ -49,10 +56,13 @@ class ChatWidget {
         // Global stop button event listener
         this.globalStopButton.addEventListener('click', () => this.stopAllVoice());
         
+=======
+>>>>>>> c1b8c95bd17e963c4abb27f0a859ddfe1c014f86
         // Initial state
         this.sendButton.disabled = true;
     }
     
+<<<<<<< HEAD
     // Voice Recognition Methods
     initSpeechRecognition() {
         if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
@@ -135,15 +145,20 @@ class ChatWidget {
         }
     }
     
+=======
+>>>>>>> c1b8c95bd17e963c4abb27f0a859ddfe1c014f86
     async sendMessage() {
         const message = this.messageInput.value.trim();
         if (!message || this.isTyping) return;
         
+<<<<<<< HEAD
         // Stop listening if active
         if (this.isListening) {
             this.stopListening();
         }
         
+=======
+>>>>>>> c1b8c95bd17e963c4abb27f0a859ddfe1c014f86
         // Add user message
         this.addMessage(message, 'user');
         this.messageInput.value = '';
@@ -235,6 +250,7 @@ class ChatWidget {
         answerParagraph.textContent = response.answer || 'No answer received';
         contentDiv.appendChild(answerParagraph);
         
+<<<<<<< HEAD
         // Add voice control buttons
         const voiceControlsDiv = document.createElement('div');
         voiceControlsDiv.className = 'voice-controls';
@@ -257,6 +273,8 @@ class ChatWidget {
         
         contentDiv.appendChild(voiceControlsDiv);
         
+=======
+>>>>>>> c1b8c95bd17e963c4abb27f0a859ddfe1c014f86
         // Add sources if available
         if (response.sources && response.sources.length > 0) {
             const sourcesDiv = document.createElement('div');
@@ -284,6 +302,7 @@ class ChatWidget {
         this.scrollToBottom();
     }
     
+<<<<<<< HEAD
     // Text-to-Speech functionality
     speakText(text) {
         if ('speechSynthesis' in window) {
@@ -352,6 +371,8 @@ class ChatWidget {
         });
     }
     
+=======
+>>>>>>> c1b8c95bd17e963c4abb27f0a859ddfe1c014f86
     addErrorMessage(errorMessage) {
         const messageDiv = document.createElement('div');
         messageDiv.className = 'message bot-message';
@@ -387,6 +408,7 @@ class ChatWidget {
             this.chatMessages.scrollTop = this.chatMessages.scrollHeight;
         }, 100);
     }
+<<<<<<< HEAD
     
     // Stop all voice activities
     stopAllVoice() {
@@ -407,6 +429,8 @@ class ChatWidget {
         const isAnyVoiceActive = this.isListening || this.currentUtterance;
         this.globalStopButton.style.display = isAnyVoiceActive ? 'flex' : 'none';
     }
+=======
+>>>>>>> c1b8c95bd17e963c4abb27f0a859ddfe1c014f86
 }
 
 // Initialize chat widget when DOM is loaded

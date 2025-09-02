@@ -26,11 +26,15 @@ body {
     overflow: hidden;
 }
 
+<<<<<<< HEAD
 /* Header Layout */
+=======
+>>>>>>> c1b8c95bd17e963c4abb27f0a859ddfe1c014f86
 .chat-header {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     color: white;
     padding: 20px;
+<<<<<<< HEAD
     border-radius: 10px 10px 0 0;
     display: flex;
     justify-content: space-between;
@@ -51,6 +55,9 @@ body {
 .header-controls {
     display: flex;
     align-items: center;
+=======
+    text-align: center;
+>>>>>>> c1b8c95bd17e963c4abb27f0a859ddfe1c014f86
 }
 
 .chat-header h2 {
@@ -245,6 +252,7 @@ body {
         max-width: 90%;
     }
 }
+<<<<<<< HEAD
 
 /* Voice Interface Styles */
 .voice-button {
@@ -400,3 +408,5 @@ body {
 .global-stop-button:active {
     transform: translateY(0);
 }
+=======
+>>>>>>> c1b8c95bd17e963c4abb27f0a859ddfe1c014f86
