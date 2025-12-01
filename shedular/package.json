@@ -1,0 +1,15 @@
+{
+  "name": "shedular",
+  "version": "1.0.0",
+  "description": "Daily Motivational Thought for Slack 🚀\r This is a small Node.js project that generates a new and inspiring motivational thought every morning and sends it to your Slack channel. It uses the Google Gemini API to generate the thoughts, making each message unique.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^1.11.0"
+  }
+}

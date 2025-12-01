@@ -7,14 +7,16 @@
 const axios = require('axios');
 
 // TODO: Insert your Slack Webhook URL here.
-const slackWebhookUrl = "https://hooks.slack.com/services/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";
+// Use environment variable for security
+const slackWebhookUrl = process.env.SLACK_WEBHOOK_URL || "";
 
 
 // Canvas AI API setup
 const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent`;
 // TODO: When running the code on a local machine, add your API key here.
 // In the Canvas environment, leave it blank.
-const API_KEY = "AIzaSyB_x8VWKB6iuXu-QITmM3wdMxXB2UmMxeE";
+// Use environment variable for security
+const API_KEY = process.env.GEMINI_API_KEY || "";
 
 
 // Async function to generate a motivational thought from the AI
@@ -76,11 +78,10 @@ async function sendDailyMotivation() {
         const slackPayload = {
             "blocks": [
                 {
-                    "type": "header",
+                    "type": "section",
                     "text": {
-                        "type": "plain_text",
-                        "text": "Today's Motivational Thought 🚀",
-                        "emoji": true
+                        "type": "mrkdwn",
+                        "text": "*Today's Motivational Thought 🚀*"
                     }
                 },
                 {
