@@ -1,5 +1,4 @@
 
-// const slackWebhookUrl = "https://hooks.slack.com/services/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";
 
 // coding=utf-8
 
@@ -12,7 +11,7 @@ const slackWebhookUrl = process.env.SLACK_WEBHOOK_URL || "";
 
 
 // Canvas AI API setup
-const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent`;
+const API_URL = ``;
 // TODO: When running the code on a local machine, add your API key here.
 // In the Canvas environment, leave it blank.
 // Use environment variable for security
