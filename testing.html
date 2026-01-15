@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flipkart Clone - Online Shopping</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f1f3f6;
+        }
+
+        /* Header Styles */
+        .testing-header {
+            background-color: #2874f0;
+            color: white;
+            padding: 12px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .testing-header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            padding: 0 20px;
+        }
+
+        .testing-logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: white;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .testing-logo-icon {
+            font-size: 28px;
+        }
+
+        .testing-search-container {
+            flex: 1;
+            position: relative;
+        }
+
+        .testing-search-box {
+            width: 100%;
+            padding: 10px 50px 10px 15px;
+            border: none;
+            border-radius: 2px;
+            font-size: 14px;
+            outline: none;
+        }
+
+        .testing-search-btn {
+            position: absolute;
+            right: 0;
+            top: 0;
+            height: 100%;
+            padding: 0 20px;
+            background-color: #fff;
+            border: none;
+            border-left: 1px solid #e0e0e0;
+            cursor: pointer;
+            color: #2874f0;
+            font-weight: 500;
+        }
+
+        .testing-header-actions {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .testing-login-btn {
+            background-color: white;
+            color: #2874f0;
+            padding: 8px 40px;
+            border: none;
+            border-radius: 2px;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .testing-cart-btn, .testing-more-btn {
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        /* Navigation Menu */
+        .testing-nav {
+            background-color: white;
+            border-bottom: 1px solid #e0e0e0;
+            padding: 12px 0;
+        }
+
+        .testing-nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            gap: 30px;
+            padding: 0 20px;
+            overflow-x: auto;
+        }
+
+        .testing-nav-item {
+            text-decoration: none;
+            color: #212121;
+            font-size: 14px;
+            font-weight: 500;
+            white-space: nowrap;
+            padding: 5px 0;
+            transition: color 0.2s;
+        }
+
+        .testing-nav-item:hover {
+            color: #2874f0;
+        }
+
+        /* Banner Section */
+        .testing-banner-section {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 0 20px;
+        }
+
+        .testing-banner-container {
+            background: linear-gradient(180deg, #2874f0 0%, #1a5fd4 100%);
+            border-radius: 2px;
+            padding: 40px;
+            color: white;
+            text-align: center;
+        }
+
+        .testing-banner-title {
+            font-size: 48px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .testing-banner-subtitle {
+            font-size: 18px;
+            opacity: 0.9;
+        }
+
+        /* Product Sections */
+        .testing-section {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 0 20px;
+        }
+
+        .testing-section-header {
+            background-color: white;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-radius: 2px 2px 0 0;
+        }
+
+        .testing-section-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: #212121;
+        }
+
+        .testing-view-all {
+            color: #2874f0;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .testing-products-container {
+            background-color: white;
+            padding: 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 20px;
+            border-radius: 0 0 2px 2px;
+        }
+
+        .testing-product-card {
+            text-align: center;
+            padding: 15px;
+            border-radius: 2px;
+            transition: transform 0.2s, box-shadow 0.2s;
+            cursor: pointer;
+        }
+
+        .testing-product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .testing-product-image {
+            width: 100%;
+            height: 150px;
+            object-fit: contain;
+            margin-bottom: 10px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+        }
+
+        .testing-product-title {
+            font-size: 14px;
+            color: #212121;
+            margin-bottom: 8px;
+            font-weight: 500;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .testing-product-price {
+            font-size: 16px;
+            font-weight: 600;
+            color: #2874f0;
+            margin-bottom: 5px;
+        }
+
+        .testing-product-rating {
+            font-size: 12px;
+            color: #388e3c;
+            font-weight: 500;
+        }
+
+        /* Deals Section */
+        .testing-deals-container {
+            background-color: white;
+            padding: 20px;
+            display: flex;
+            gap: 15px;
+            overflow-x: auto;
+            border-radius: 2px;
+        }
+
+        .testing-deal-card {
+            min-width: 200px;
+            text-align: center;
+            padding: 15px;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+        }
+
+        .testing-deal-image {
+            width: 100%;
+            height: 150px;
+            object-fit: contain;
+            margin-bottom: 10px;
+        }
+
+        .testing-deal-price {
+            font-size: 18px;
+            font-weight: 600;
+            color: #212121;
+            margin-bottom: 5px;
+        }
+
+        .testing-deal-discount {
+            color: #388e3c;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        /* Footer */
+        .testing-footer {
+            background-color: #172337;
+            color: #878787;
+            padding: 40px 0 20px;
+            margin-top: 40px;
+        }
+
+        .testing-footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .testing-footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .testing-footer-column h3 {
+            color: #878787;
+            font-size: 12px;
+            font-weight: 400;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+        }
+
+        .testing-footer-link {
+            display: block;
+            color: white;
+            text-decoration: none;
+            font-size: 12px;
+            margin-bottom: 10px;
+            transition: color 0.2s;
+        }
+
+        .testing-footer-link:hover {
+            color: #2874f0;
+        }
+
+        .testing-footer-bottom {
+            border-top: 1px solid #454d5e;
+            padding-top: 20px;
+            text-align: center;
+            font-size: 12px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .testing-header-container {
+                flex-wrap: wrap;
+            }
+
+            .testing-search-container {
+                order: 3;
+                width: 100%;
+            }
+
+            .testing-banner-title {
+                font-size: 32px;
+            }
+
+            .testing-products-container {
+                grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+                gap: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="testing-header">
+        <div class="testing-header-container">
+            <a href="#" class="testing-logo">
+                <span class="testing-logo-icon">🛒</span>
+                <span>Flipkart</span>
+            </a>
+            <div class="testing-search-container">
+                <input type="text" class="testing-search-box" placeholder="Search for products, brands and more">
+                <button class="testing-search-btn">🔍 Search</button>
+            </div>
+            <div class="testing-header-actions">
+                <button class="testing-login-btn">Login</button>
+                <button class="testing-more-btn">
+                    More <span>▼</span>
+                </button>
+                <button class="testing-cart-btn">
+                    🛒 Cart
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav class="testing-nav">
+        <div class="testing-nav-container">
+            <a href="#" class="testing-nav-item">Electronics</a>
+            <a href="#" class="testing-nav-item">TVs & Appliances</a>
+            <a href="#" class="testing-nav-item">Men</a>
+            <a href="#" class="testing-nav-item">Women</a>
+            <a href="#" class="testing-nav-item">Baby & Kids</a>
+            <a href="#" class="testing-nav-item">Home & Furniture</a>
+            <a href="#" class="testing-nav-item">Sports, Books & More</a>
+            <a href="#" class="testing-nav-item">Flights</a>
+            <a href="#" class="testing-nav-item">Offer Zone</a>
+        </div>
+    </nav>
+
+    <!-- Banner -->
+    <section class="testing-banner-section">
+        <div class="testing-banner-container">
+            <h1 class="testing-banner-title">Big Shopping Days</h1>
+            <p class="testing-banner-subtitle">Up to 80% Off on Top Brands</p>
+        </div>
+    </section>
+
+    <!-- Deals of the Day -->
+    <section class="testing-section">
+        <div class="testing-section-header">
+            <h2 class="testing-section-title">Deals of the Day</h2>
+            <a href="#" class="testing-view-all">View All</a>
+        </div>
+        <div class="testing-deals-container">
+            <div class="testing-deal-card">
+                <img src="https://via.placeholder.com/200x150/2874f0/ffffff?text=Product+1" alt="Product" class="testing-deal-image">
+                <div class="testing-deal-price">₹999</div>
+                <div class="testing-deal-discount">50% off</div>
+            </div>
+            <div class="testing-deal-card">
+                <img src="https://via.placeholder.com/200x150/388e3c/ffffff?text=Product+2" alt="Product" class="testing-deal-image">
+                <div class="testing-deal-price">₹1,499</div>
+                <div class="testing-deal-discount">40% off</div>
+            </div>
+            <div class="testing-deal-card">
+                <img src="https://via.placeholder.com/200x150/ff5722/ffffff?text=Product+3" alt="Product" class="testing-deal-image">
+                <div class="testing-deal-price">₹2,999</div>
+                <div class="testing-deal-discount">60% off</div>
+            </div>
+            <div class="testing-deal-card">
+                <img src="https://via.placeholder.com/200x150/f57c00/ffffff?text=Product+4" alt="Product" class="testing-deal-image">
+                <div class="testing-deal-price">₹799</div>
+                <div class="testing-deal-discount">30% off</div>
+            </div>
+            <div class="testing-deal-card">
+                <img src="https://via.placeholder.com/200x150/7b1fa2/ffffff?text=Product+5" alt="Product" class="testing-deal-image">
+                <div class="testing-deal-price">₹1,299</div>
+                <div class="testing-deal-discount">45% off</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Best of Electronics -->
+    <section class="testing-section">
+        <div class="testing-section-header">
+            <h2 class="testing-section-title">Best of Electronics</h2>
+            <a href="#" class="testing-view-all">View All</a>
+        </div>
+        <div class="testing-products-container">
+            <div class="testing-product-card">
+                <img src="https://via.placeholder.com/180x150/2874f0/ffffff?text=Mobile" alt="Product" class="testing-product-image">
+                <div class="testing-product-title">Smartphone 128GB</div>
+                <div class="testing-product-price">₹15,999</div>
+                <div class="testing-product-rating">⭐ 4.5 (2,345)</div>
+            </div>
+            <div class="testing-product-card">
+                <img src="https://via.placeholder.com/180x150/388e3c/ffffff?text=Laptop" alt="Product" class="testing-product-image">
+                <div class="testing-product-title">Laptop 8GB RAM</div>
+                <div class="testing-product-price">₹45,999</div>
+                <div class="testing-product-rating">⭐ 4.3 (1,234)</div>
+            </div>
+            <div class="testing-product-card">
+                <img src="https://via.placeholder.com/180x150/ff5722/ffffff?text=Headphones" alt="Product" class="testing-product-image">
+                <div class="testing-product-title">Wireless Headphones</div>
+                <div class="testing-product-price">₹2,499</div>
+                <div class="testing-product-rating">⭐ 4.7 (5,678)</div>
+            </div>
+            <div class="testing-product-card">
+                <img src="https://via.placeholder.com/180x150/f57c00/ffffff?text=Smartwatch" alt="Product" class="testing-product-image">
+                <div class="testing-product-title">Smart Watch</div>
+                <div class="testing-product-price">₹3,999</div>
+                <div class="testing-product-rating">⭐ 4.2 (3,456)</div>
+            </div>
+            <div class="testing-product-card">
+                <img src="https://via.placeholder.com/180x150/7b1fa2/ffffff?text=Tablet" alt="Product" class="testing-product-image">
+                <div class="testing-product-title">Tablet 64GB</div>
+                <div class="testing-product-price">₹12,999</div>
+                <div class="testing-product-rating">⭐ 4.4 (987)</div>
+            </div>
+            <div class="testing-product-card">
+                <img src="https://via.placeholder.com/180x150/1976d2/ffffff?text=Speaker" alt="Product" class="testing-product-image">
+                <div class="testing-product-title">Bluetooth Speaker</div>
+                <div class="testing-product-price">₹1,999</div>
+                <div class="testing-product-rating">⭐ 4.6 (2,123)</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Fashion -->
+    <section class="testing-section">
+        <div class="testing-section-header">
+            <h2 class="testing-section-title">Fashion Top Deals</h2>
+            <a href="#" class="testing-view-all">View All</a>
+        </div>
+        <div class="testing-products-container">
+            <div class="testing-product-card">
+                <img src="https://via.placeholder.com/180x150/e91e63/ffffff?text=Shirt" alt="Product" class="testing-product-image">
+                <div class="testing-product-title">Men's Casual Shirt</div>
+                <div class="testing-product-price">₹599</div>
+                <div class="testing-product-rating">⭐ 4.3 (456)</div>
+            </div>
+            <div class="testing-product-card">
+                <img src="https://via.placeholder.com/180x150/9c27b0/ffffff?text=Dress" alt="Product" class="testing-product-image">
+                <div class="testing-product-title">Women's Dress</div>
+                <div class="testing-product-price">₹1,299</div>
+                <div class="testing-product-rating">⭐ 4.5 (789)</div>
+            </div>
+            <div class="testing-product-card">
+                <img src="https://via.placeholder.com/180x150/00bcd4/ffffff?text=Shoes" alt="Product" class="testing-product-image">
+                <div class="testing-product-title">Sports Shoes</div>
+                <div class="testing-product-price">₹1,999</div>
+                <div class="testing-product-rating">⭐ 4.4 (1,234)</div>
+            </div>
+            <div class="testing-product-card">
+                <img src="https://via.placeholder.com/180x150/ff9800/ffffff?text=Bag" alt="Product" class="testing-product-image">
+                <div class="testing-product-title">Laptop Bag</div>
+                <div class="testing-product-price">₹899</div>
+                <div class="testing-product-rating">⭐ 4.2 (567)</div>
+            </div>
+            <div class="testing-product-card">
+                <img src="https://via.placeholder.com/180x150/4caf50/ffffff?text=Watch" alt="Product" class="testing-product-image">
+                <div class="testing-product-title">Analog Watch</div>
+                <div class="testing-product-price">₹1,499</div>
+                <div class="testing-product-rating">⭐ 4.6 (890)</div>
+            </div>
+            <div class="testing-product-card">
+                <img src="https://via.placeholder.com/180x150/2196f3/ffffff?text=Jeans" alt="Product" class="testing-product-image">
+                <div class="testing-product-title">Men's Jeans</div>
+                <div class="testing-product-price">₹999</div>
+                <div class="testing-product-rating">⭐ 4.3 (1,012)</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Home & Furniture -->
+    <section class="testing-section">
+        <div class="testing-section-header">
+            <h2 class="testing-section-title">Home & Furniture</h2>
+            <a href="#" class="testing-view-all">View All</a>
+        </div>
+        <div class="testing-products-container">
+            <div class="testing-product-card">
+                <img src="https://via.placeholder.com/180x150/795548/ffffff?text=Sofa" alt="Product" class="testing-product-image">
+                <div class="testing-product-title">3 Seater Sofa</div>
+                <div class="testing-product-price">₹24,999</div>
+                <div class="testing-product-rating">⭐ 4.5 (234)</div>
+            </div>
+            <div class="testing-product-card">
+                <img src="https://via.placeholder.com/180x150/607d8b/ffffff?text=Table" alt="Product" class="testing-product-image">
+                <div class="testing-product-title">Dining Table</div>
+                <div class="testing-product-price">₹12,999</div>
+                <div class="testing-product-rating">⭐ 4.3 (189)</div>
+            </div>
+            <div class="testing-product-card">
+                <img src="https://via.placeholder.com/180x150/8bc34a/ffffff?text=Lamp" alt="Product" class="testing-product-image">
+                <div class="testing-product-title">LED Lamp</div>
+                <div class="testing-product-price">₹899</div>
+                <div class="testing-product-rating">⭐ 4.4 (456)</div>
+            </div>
+            <div class="testing-product-card">
+                <img src="https://via.placeholder.com/180x150/ffc107/ffffff?text=Curtains" alt="Product" class="testing-product-image">
+                <div class="testing-product-title">Window Curtains</div>
+                <div class="testing-product-price">₹1,299</div>
+                <div class="testing-product-rating">⭐ 4.2 (321)</div>
+            </div>
+            <div class="testing-product-card">
+                <img src="https://via.placeholder.com/180x150/ff5722/ffffff?text=Bed" alt="Product" class="testing-product-image">
+                <div class="testing-product-title">Queen Size Bed</div>
+                <div class="testing-product-price">₹18,999</div>
+                <div class="testing-product-rating">⭐ 4.6 (178)</div>
+            </div>
+            <div class="testing-product-card">
+                <img src="https://via.placeholder.com/180x150/9e9e9e/ffffff?text=Chair" alt="Product" class="testing-product-image">
+                <div class="testing-product-title">Office Chair</div>
+                <div class="testing-product-price">₹3,499</div>
+                <div class="testing-product-rating">⭐ 4.3 (267)</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="testing-footer">
+        <div class="testing-footer-container">
+            <div class="testing-footer-grid">
+                <div class="testing-footer-column">
+                    <h3>About</h3>
+                    <a href="#" class="testing-footer-link">Contact Us</a>
+                    <a href="#" class="testing-footer-link">About Us</a>
+                    <a href="#" class="testing-footer-link">Careers</a>
+                    <a href="#" class="testing-footer-link">Flipkart Stories</a>
+                    <a href="#" class="testing-footer-link">Press</a>
+                </div>
+                <div class="testing-footer-column">
+                    <h3>Help</h3>
+                    <a href="#" class="testing-footer-link">Payments</a>
+                    <a href="#" class="testing-footer-link">Shipping</a>
+                    <a href="#" class="testing-footer-link">Cancellation & Returns</a>
+                    <a href="#" class="testing-footer-link">FAQ</a>
+                    <a href="#" class="testing-footer-link">Report Infringement</a>
+                </div>
+                <div class="testing-footer-column">
+                    <h3>Consumer Policy</h3>
+                    <a href="#" class="testing-footer-link">Cancellation & Returns</a>
+                    <a href="#" class="testing-footer-link">Terms Of Use</a>
+                    <a href="#" class="testing-footer-link">Security</a>
+                    <a href="#" class="testing-footer-link">Privacy</a>
+                    <a href="#" class="testing-footer-link">Sitemap</a>
+                </div>
+                <div class="testing-footer-column">
+                    <h3>Social</h3>
+                    <a href="#" class="testing-footer-link">Facebook</a>
+                    <a href="#" class="testing-footer-link">Twitter</a>
+                    <a href="#" class="testing-footer-link">YouTube</a>
+                </div>
+            </div>
+            <div class="testing-footer-bottom">
+                <p>© 2024 Flipkart Clone. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

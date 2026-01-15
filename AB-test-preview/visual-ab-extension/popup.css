@@ -1,0 +1,58 @@
+* {
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  margin: 0;
+}
+
+.popup-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.popup-box {
+  background: #fff;
+  width: 100%;
+  max-width: 500px;
+  padding: 16px;
+  border-radius: 10px;
+}
+
+h3 {
+  margin-top: 0;
+  text-align: center;
+}
+
+.row {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.row input {
+  flex: 1;
+  padding: 6px;
+}
+
+.actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.actions button {
+  padding: 6px 12px;
+  cursor: pointer;
+}
+
+.preview-area {
+  margin-top: 15px;
+  padding: 10px;
+  border: 1px dashed #ccc;
+}
