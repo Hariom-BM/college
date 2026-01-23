@@ -1,11 +1,11 @@
 import React from 'react'
 import { createRoot } from 'react-dom/client'
-import MeetingNotesManager from './index.js'
+import ABTestGenerator from './ABTestGenerator.jsx'
 import './styles.css'
 
 const root = document.getElementById('root')
 createRoot(root).render(
   <React.StrictMode>
-    <MeetingNotesManager />
+    <ABTestGenerator />
   </React.StrictMode>
 )
