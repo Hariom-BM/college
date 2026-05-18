@@ -1,0 +1,1103 @@
+<!doctype html>
+<html lang="hi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0"
+    />
+    <meta name="theme-color" content="#C0392B" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      content="black-translucent"
+    />
+    <title>Dinesh Bike Point</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700&family=Noto+Sans+Devanagari:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --orange: #e8470a;
+        --orange-dark: #c03808;
+        --orange-light: #fdf0eb;
+        --orange-mid: #f5874a;
+        --green: #1a9654;
+        --green-dark: #127a42;
+        --green-light: #e8f7ef;
+        --red: #d93025;
+        --text: #1a1208;
+        --text2: #5a4a36;
+        --text3: #9a8a76;
+        --bg: #fbf8f5;
+        --surface: #ffffff;
+        --border: rgba(200, 170, 140, 0.35);
+        --border2: rgba(200, 170, 140, 0.6);
+        --radius: 14px;
+        --radius-sm: 9px;
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        -webkit-tap-highlight-color: transparent;
+      }
+
+      body {
+        font-family: "Baloo 2", "Noto Sans Devanagari", sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        min-height: 100vh;
+        padding-bottom: 2rem;
+      }
+
+      .header {
+        background: var(--orange);
+        padding: 1rem 1.25rem 1.25rem;
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        position: sticky;
+        top: 0;
+        z-index: 50;
+      }
+      .header-icon {
+        width: 46px;
+        height: 46px;
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 22px;
+      }
+      .header-text .shop {
+        font-size: 19px;
+        font-weight: 700;
+        color: #fff;
+        line-height: 1.2;
+      }
+      .header-text .sub {
+        font-size: 12px;
+        color: rgba(255, 255, 255, 0.8);
+      }
+      .header-right {
+        margin-left: auto;
+      }
+      .btn-history {
+        background: rgba(255, 255, 255, 0.2);
+        border: none;
+        color: #fff;
+        border-radius: 9px;
+        padding: 7px 12px;
+        font-size: 13px;
+        font-family: "Baloo 2", sans-serif;
+        cursor: pointer;
+        font-weight: 600;
+      }
+
+      .page {
+        display: none;
+        padding: 1rem;
+      }
+      .page.active {
+        display: block;
+      }
+
+      .card {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        padding: 1rem 1.1rem;
+        margin-bottom: 1rem;
+      }
+      .card-title {
+        font-size: 12px;
+        font-weight: 600;
+        color: var(--text3);
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        margin-bottom: 12px;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+      .card-title .dot {
+        width: 7px;
+        height: 7px;
+        background: var(--orange);
+        border-radius: 50%;
+      }
+
+      .form-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+        margin-bottom: 10px;
+      }
+      .form-row.single {
+        grid-template-columns: 1fr;
+      }
+      .fg {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+      }
+      .fg label {
+        font-size: 12px;
+        color: var(--text2);
+        font-weight: 500;
+      }
+      .fg input,
+      .fg textarea,
+      .fg select {
+        border: 1px solid var(--border2);
+        border-radius: var(--radius-sm);
+        padding: 10px 12px;
+        font-size: 15px;
+        color: var(--text);
+        font-family: "Baloo 2", sans-serif;
+        background: var(--bg);
+        outline: none;
+        transition:
+          border 0.15s,
+          box-shadow 0.15s;
+        width: 100%;
+      }
+      .fg input:focus,
+      .fg textarea:focus {
+        border-color: var(--orange);
+        box-shadow: 0 0 0 3px rgba(232, 71, 10, 0.1);
+      }
+      .fg textarea {
+        resize: none;
+        min-height: 70px;
+      }
+
+      .history-bar {
+        background: var(--orange-light);
+        border: 1px solid rgba(232, 71, 10, 0.3);
+        border-radius: var(--radius-sm);
+        padding: 9px 12px;
+        margin-bottom: 10px;
+        display: none;
+      }
+      .history-bar .hb-head {
+        font-size: 12px;
+        font-weight: 600;
+        color: var(--orange-dark);
+        margin-bottom: 3px;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+      }
+      .history-bar .hb-body {
+        font-size: 13px;
+        color: #7a3010;
+        line-height: 1.5;
+      }
+
+      .work-list {
+        display: flex;
+        flex-direction: column;
+        gap: 7px;
+        margin-bottom: 10px;
+      }
+      .wi {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        background: var(--bg);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-sm);
+        padding: 9px 12px;
+        animation: fadeIn 0.2s ease;
+      }
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(-4px);
+        }
+        to {
+          opacity: 1;
+          transform: none;
+        }
+      }
+      .wi-num {
+        width: 22px;
+        height: 22px;
+        background: var(--orange);
+        color: #fff;
+        border-radius: 50%;
+        font-size: 11px;
+        font-weight: 700;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+      }
+      .wi span {
+        flex: 1;
+        font-size: 14px;
+        color: var(--text);
+      }
+      .wi-del {
+        background: none;
+        border: none;
+        color: var(--text3);
+        cursor: pointer;
+        font-size: 18px;
+        padding: 2px 4px;
+        border-radius: 6px;
+        line-height: 1;
+        transition:
+          background 0.15s,
+          color 0.15s;
+      }
+      .wi-del:hover {
+        color: var(--red);
+        background: #fdecea;
+      }
+
+      .add-row {
+        display: flex;
+        gap: 8px;
+      }
+      .add-row input {
+        flex: 1;
+      }
+      .btn-add {
+        background: var(--orange);
+        border: none;
+        color: #fff;
+        border-radius: var(--radius-sm);
+        padding: 10px 16px;
+        font-size: 22px;
+        line-height: 1;
+        cursor: pointer;
+        font-weight: 700;
+        transition: background 0.15s;
+        flex-shrink: 0;
+      }
+      .btn-add:active {
+        background: var(--orange-dark);
+      }
+
+      .amt-row {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-top: 12px;
+      }
+      .amt-row label {
+        font-size: 13px;
+        color: var(--text2);
+        font-weight: 500;
+        white-space: nowrap;
+      }
+      .amt-rupee {
+        position: relative;
+        flex: 1;
+      }
+      .amt-rupee::before {
+        content: "₹";
+        position: absolute;
+        left: 12px;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 15px;
+        color: var(--text3);
+      }
+      .amt-rupee input {
+        padding-left: 28px;
+      }
+
+      .actions {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+        margin-top: 0.5rem;
+      }
+      .btn-save {
+        background: var(--orange);
+        border: none;
+        border-radius: var(--radius);
+        padding: 14px 10px;
+        font-size: 15px;
+        font-weight: 700;
+        color: #fff;
+        cursor: pointer;
+        font-family: "Baloo 2", sans-serif;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        transition: background 0.15s;
+      }
+      .btn-save:active {
+        background: var(--orange-dark);
+      }
+      .btn-wp {
+        background: var(--green);
+        border: none;
+        border-radius: var(--radius);
+        padding: 14px 10px;
+        font-size: 15px;
+        font-weight: 700;
+        color: #fff;
+        cursor: pointer;
+        font-family: "Baloo 2", sans-serif;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        transition: background 0.15s;
+      }
+      .btn-wp:active {
+        background: var(--green-dark);
+      }
+
+      .receipt-page {
+        display: none;
+        padding: 1rem;
+      }
+      .receipt-page.active {
+        display: block;
+      }
+      .receipt-card {
+        background: var(--surface);
+        border: 1px solid var(--border2);
+        border-radius: var(--radius);
+        overflow: hidden;
+        margin-bottom: 1rem;
+      }
+      .receipt-top {
+        background: var(--orange);
+        padding: 1.2rem 1.25rem 1rem;
+        text-align: center;
+      }
+      .receipt-top .r-shop {
+        font-size: 20px;
+        font-weight: 700;
+        color: #fff;
+      }
+      .receipt-top .r-tagline {
+        font-size: 12px;
+        color: rgba(255, 255, 255, 0.8);
+        margin-top: 2px;
+      }
+      .receipt-top .r-token {
+        display: inline-block;
+        background: rgba(255, 255, 255, 0.25);
+        color: #fff;
+        font-size: 13px;
+        font-weight: 700;
+        padding: 4px 14px;
+        border-radius: 20px;
+        margin-top: 8px;
+        letter-spacing: 0.04em;
+      }
+      .receipt-body {
+        padding: 1rem 1.25rem;
+      }
+      .r-section {
+        margin-bottom: 12px;
+      }
+      .r-sec-title {
+        font-size: 11px;
+        font-weight: 600;
+        color: var(--text3);
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        margin-bottom: 6px;
+        border-bottom: 1px dashed var(--border2);
+        padding-bottom: 4px;
+      }
+      .r-row {
+        display: flex;
+        justify-content: space-between;
+        font-size: 14px;
+        padding: 3px 0;
+      }
+      .r-row .lbl {
+        color: var(--text2);
+      }
+      .r-row .val {
+        color: var(--text);
+        font-weight: 500;
+        text-align: right;
+        max-width: 60%;
+      }
+      .r-work-item {
+        display: flex;
+        gap: 8px;
+        font-size: 14px;
+        padding: 4px 0;
+        border-bottom: 1px solid var(--border);
+        color: var(--text);
+      }
+      .r-work-item::before {
+        content: "•";
+        color: var(--orange);
+        font-weight: 700;
+        flex-shrink: 0;
+      }
+      .r-total {
+        display: flex;
+        justify-content: space-between;
+        font-size: 17px;
+        font-weight: 700;
+        border-top: 2px solid var(--border2);
+        padding-top: 10px;
+        margin-top: 10px;
+        color: var(--text);
+      }
+      .r-total .t-val {
+        color: var(--orange-dark);
+      }
+      .receipt-footer {
+        text-align: center;
+        font-size: 12px;
+        color: var(--text3);
+        padding: 10px 1.25rem 1rem;
+        border-top: 1px dashed var(--border2);
+      }
+
+      .rec-actions {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+      }
+      .btn-back {
+        background: none;
+        border: 1px solid var(--border2);
+        border-radius: var(--radius);
+        padding: 13px;
+        font-size: 14px;
+        font-weight: 600;
+        color: var(--text);
+        cursor: pointer;
+        font-family: "Baloo 2", sans-serif;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 7px;
+      }
+      .btn-back:active {
+        background: var(--bg);
+      }
+      .btn-send-wp {
+        background: var(--green);
+        border: none;
+        border-radius: var(--radius);
+        padding: 13px;
+        font-size: 14px;
+        font-weight: 700;
+        color: #fff;
+        cursor: pointer;
+        font-family: "Baloo 2", sans-serif;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 7px;
+      }
+      .btn-send-wp:active {
+        background: var(--green-dark);
+      }
+
+      .history-page {
+        display: none;
+        padding: 1rem;
+      }
+      .history-page.active {
+        display: block;
+      }
+      .h-entry {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        padding: 1rem 1.1rem;
+        margin-bottom: 10px;
+        cursor: pointer;
+        transition: border-color 0.15s;
+      }
+      .h-entry:active {
+        border-color: var(--orange);
+        background: var(--orange-light);
+      }
+      .h-entry-top {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin-bottom: 4px;
+      }
+      .h-name {
+        font-size: 15px;
+        font-weight: 600;
+        color: var(--text);
+      }
+      .h-token {
+        font-size: 11px;
+        color: var(--orange-dark);
+        background: var(--orange-light);
+        padding: 3px 9px;
+        border-radius: 20px;
+        font-weight: 600;
+      }
+      .h-bike {
+        font-size: 13px;
+        color: var(--text2);
+        margin-bottom: 4px;
+      }
+      .h-bottom {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .h-date {
+        font-size: 12px;
+        color: var(--text3);
+      }
+      .h-amt {
+        font-size: 14px;
+        font-weight: 700;
+        color: var(--orange-dark);
+      }
+      .h-works {
+        font-size: 12px;
+        color: var(--text3);
+        margin-top: 4px;
+      }
+      .empty-state {
+        text-align: center;
+        padding: 3rem 1rem;
+        color: var(--text3);
+      }
+      .empty-state .e-icon {
+        font-size: 48px;
+        margin-bottom: 12px;
+      }
+      .empty-state p {
+        font-size: 15px;
+      }
+
+      .toast {
+        position: fixed;
+        bottom: 1.5rem;
+        left: 50%;
+        transform: translateX(-50%);
+        background: #1a1208;
+        color: #fff;
+        border-radius: var(--radius-sm);
+        padding: 11px 20px;
+        font-size: 14px;
+        font-weight: 500;
+        z-index: 999;
+        white-space: nowrap;
+        opacity: 0;
+        transition: opacity 0.25s;
+        pointer-events: none;
+      }
+      .toast.show {
+        opacity: 1;
+      }
+
+      .search-row {
+        margin-bottom: 1rem;
+      }
+      .search-row input {
+        width: 100%;
+        border: 1px solid var(--border2);
+        border-radius: var(--radius-sm);
+        padding: 10px 12px 10px 36px;
+        font-size: 15px;
+        color: var(--text);
+        font-family: "Baloo 2", sans-serif;
+        background: var(--surface);
+        outline: none;
+      }
+      .search-wrap {
+        position: relative;
+      }
+      .search-wrap::before {
+        content: "🔍";
+        position: absolute;
+        left: 11px;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 14px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <div class="header-icon">🔧</div>
+      <div class="header-text">
+        <div class="shop">Dinesh Bike Point</div>
+        <div class="sub">📞 97163-07421 &nbsp;|&nbsp; 88169-00576</div>
+      </div>
+      <div class="header-right">
+        <button class="btn-history" id="headerBtn" onclick="togglePage()">
+          📋 Records
+        </button>
+      </div>
+    </div>
+
+    <!-- NEW ENTRY PAGE -->
+    <div class="page active" id="page-form">
+      <div class="card">
+        <div class="card-title"><span class="dot"></span> Customer Details</div>
+        <div class="form-row">
+          <div class="fg">
+            <label>Customer ka naam *</label>
+            <input
+              type="text"
+              id="cname"
+              placeholder="Naam likho..."
+              oninput="checkHistory()"
+              autocomplete="off"
+            />
+          </div>
+          <div class="fg">
+            <label>Mobile number *</label>
+            <input
+              type="tel"
+              id="cphone"
+              placeholder="10 digit"
+              maxlength="10"
+              oninput="checkHistory()"
+              autocomplete="off"
+            />
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="fg">
+            <label>Bike model</label>
+            <input
+              type="text"
+              id="cbike"
+              placeholder="Splendor, Activa..."
+              autocomplete="off"
+            />
+          </div>
+          <div class="fg">
+            <label>Number plate</label>
+            <input
+              type="text"
+              id="cplate"
+              placeholder="UP32 AB 1234"
+              autocomplete="off"
+              style="text-transform: uppercase"
+            />
+          </div>
+        </div>
+        <div class="history-bar" id="historyBar">
+          <div class="hb-head">⏰ Purani visit mili!</div>
+          <div class="hb-body" id="historyText"></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title"><span class="dot"></span> Kaam ki List</div>
+        <div class="work-list" id="workList"></div>
+        <div class="add-row">
+          <input
+            type="text"
+            id="workInput"
+            placeholder="Kya thik karna hai? Likho aur + dabao"
+            onkeydown="if (event.key === 'Enter') addWork();"
+            autocomplete="off"
+          />
+          <button class="btn-add" onclick="addWork()">+</button>
+        </div>
+        <div class="amt-row">
+          <label>Total amount</label>
+          <div class="amt-rupee">
+            <input type="number" id="camount" placeholder="0" min="0" />
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title"><span class="dot"></span> Extra Notes</div>
+        <div class="fg form-row single">
+          <textarea
+            id="cnotes"
+            placeholder="Koi baat note karni ho... (optional)"
+          ></textarea>
+        </div>
+      </div>
+
+      <div class="actions">
+        <button class="btn-save" onclick="saveEntry(false)">
+          💾 Save karo
+        </button>
+        <button class="btn-wp" onclick="saveEntry(true)">📱 WhatsApp</button>
+      </div>
+    </div>
+
+    <!-- RECEIPT PAGE -->
+    <div class="receipt-page" id="page-receipt">
+      <div class="receipt-card">
+        <div class="receipt-top">
+          <div class="r-shop">🔧 Dinesh Bike Point</div>
+          <div class="r-tagline">Service & Repair — Receipt</div>
+          <div class="r-token" id="r-token">DBP-000</div>
+        </div>
+        <div class="receipt-body" id="r-body"></div>
+        <div class="receipt-footer">
+          Dhanyawad! Dobara zarur aana 🙏<br />📞 9716307421 &nbsp;|&nbsp;
+          8816900576
+        </div>
+      </div>
+      <div class="rec-actions">
+        <button class="btn-back" onclick="newEntry()">✏️ Naya entry</button>
+        <button class="btn-send-wp" onclick="sendWA()">
+          📲 WhatsApp bhejo
+        </button>
+      </div>
+    </div>
+
+    <!-- HISTORY PAGE -->
+    <div class="history-page" id="page-history">
+      <div class="search-wrap search-row">
+        <input
+          type="text"
+          id="searchInput"
+          placeholder="Naam ya number se dhundho..."
+          oninput="renderHistory()"
+        />
+      </div>
+      <div id="historyList"></div>
+    </div>
+
+    <div class="toast" id="toast"></div>
+
+    <script>
+      let workItems = [];
+      let records = [];
+      let currentWAMsg = "";
+      let currentPhone = "";
+
+      try {
+        records = JSON.parse(localStorage.getItem("dbp_v2") || "[]");
+      } catch (e) {
+        records = [];
+      }
+
+      function save() {
+        try {
+          localStorage.setItem("dbp_v2", JSON.stringify(records));
+        } catch (e) {}
+      }
+
+      let currentPage = "form";
+
+      function showPage(p) {
+        currentPage = p;
+        document.getElementById("page-form").classList.remove("active");
+        document.getElementById("page-receipt").classList.remove("active");
+        document.getElementById("page-history").classList.remove("active");
+        if (p === "form")
+          document.getElementById("page-form").classList.add("active");
+        else if (p === "receipt")
+          document.getElementById("page-receipt").classList.add("active");
+        else if (p === "history") {
+          renderHistory();
+          document.getElementById("page-history").classList.add("active");
+        }
+        const btn = document.getElementById("headerBtn");
+        if (p === "history") {
+          btn.textContent = "✏️ New Entry";
+        } else {
+          btn.textContent = "📋 Records";
+        }
+        window.scrollTo(0, 0);
+      }
+
+      function togglePage() {
+        if (currentPage === "history") {
+          newEntry();
+        } else {
+          showPage("history");
+        }
+      }
+
+      function getToken() {
+        const d = new Date();
+        const dd = String(d.getDate()).padStart(2, "0");
+        const mm = String(d.getMonth() + 1).padStart(2, "0");
+        const yy = String(d.getFullYear()).slice(2);
+        return (
+          "DBP-" +
+          yy +
+          mm +
+          dd +
+          "-" +
+          String(records.length + 1).padStart(3, "0")
+        );
+      }
+
+      function getDateTime() {
+        return new Date().toLocaleString("en-IN", {
+          day: "2-digit",
+          month: "2-digit",
+          year: "numeric",
+          hour: "2-digit",
+          minute: "2-digit",
+        });
+      }
+
+      function checkHistory() {
+        const phone = document.getElementById("cphone").value.trim();
+        const name = document
+          .getElementById("cname")
+          .value.trim()
+          .toLowerCase();
+        const bar = document.getElementById("historyBar");
+        if (phone.length < 10 && name.length < 3) {
+          bar.style.display = "none";
+          return;
+        }
+        const match = records.filter(
+          (r) =>
+            (phone.length >= 10 && r.phone === phone) ||
+            (name.length >= 3 && r.name.toLowerCase() === name),
+        );
+        if (match.length > 0) {
+          const last = match[match.length - 1];
+          document.getElementById("historyText").innerHTML =
+            "<b>Last visit:</b> " +
+            last.date +
+            "<br>" +
+            (last.bike ? "<b>Bike:</b> " + last.bike + " | " : "") +
+            "<b>Kaam:</b> " +
+            last.works.join(", ") +
+            " | <b>Amount:</b> ₹" +
+            parseInt(last.amount || 0).toLocaleString("en-IN");
+          if (last.bike && !document.getElementById("cbike").value)
+            document.getElementById("cbike").value = last.bike;
+          if (last.plate && !document.getElementById("cplate").value)
+            document.getElementById("cplate").value = last.plate;
+          bar.style.display = "block";
+        } else {
+          bar.style.display = "none";
+        }
+      }
+
+      function addWork() {
+        const inp = document.getElementById("workInput");
+        const v = inp.value.trim();
+        if (!v) return;
+        workItems.push(v);
+        inp.value = "";
+        inp.focus();
+        renderWork();
+      }
+
+      function removeWork(i) {
+        workItems.splice(i, 1);
+        renderWork();
+      }
+
+      function renderWork() {
+        const list = document.getElementById("workList");
+        if (!workItems.length) {
+          list.innerHTML = "";
+          return;
+        }
+        list.innerHTML = workItems
+          .map(
+            (w, i) =>
+              `<div class="wi">
+      <div class="wi-num">${i + 1}</div>
+      <span>${w}</span>
+      <button class="wi-del" onclick="removeWork(${i})" aria-label="Hatao">✕</button>
+    </div>`,
+          )
+          .join("");
+      }
+
+      function validate() {
+        if (!document.getElementById("cname").value.trim()) {
+          showToast("❌ Customer ka naam daalo");
+          return false;
+        }
+        if (document.getElementById("cphone").value.trim().length < 10) {
+          showToast("❌ Sahi mobile number daalo");
+          return false;
+        }
+        if (!workItems.length) {
+          showToast("❌ Kam se kam ek kaam add karo");
+          return false;
+        }
+        return true;
+      }
+
+      function saveEntry(sendWANow) {
+        if (!validate()) return;
+        const token = getToken();
+        const dt = getDateTime();
+        const name = document.getElementById("cname").value.trim();
+        const phone = document.getElementById("cphone").value.trim();
+        const bike = document.getElementById("cbike").value.trim();
+        const plate = document
+          .getElementById("cplate")
+          .value.trim()
+          .toUpperCase();
+        const amount = document.getElementById("camount").value.trim() || "0";
+        const notes = document.getElementById("cnotes").value.trim();
+
+        const entry = {
+          token,
+          date: dt,
+          name,
+          phone,
+          bike,
+          plate,
+          works: [...workItems],
+          amount,
+          notes,
+        };
+        records.push(entry);
+        save();
+
+        currentPhone = phone;
+        currentWAMsg = buildWAMsg(token, dt, name, bike, plate, amount, notes);
+
+        document.getElementById("r-token").textContent = token;
+        document.getElementById("r-body").innerHTML = buildReceiptHTML(
+          token,
+          dt,
+          name,
+          phone,
+          bike,
+          plate,
+          amount,
+          notes,
+        );
+        showPage("receipt");
+        showToast("✅ Entry save ho gayi!");
+        if (sendWANow) setTimeout(sendWA, 600);
+      }
+
+      function buildReceiptHTML(
+        token,
+        dt,
+        name,
+        phone,
+        bike,
+        plate,
+        amount,
+        notes,
+      ) {
+        const worksHTML = workItems
+          .map((w) => `<div class="r-work-item">${w}</div>`)
+          .join("");
+        return `
+    <div class="r-section">
+      <div class="r-sec-title">Customer Info</div>
+      <div class="r-row"><span class="lbl">Naam</span><span class="val">${name}</span></div>
+      <div class="r-row"><span class="lbl">Mobile</span><span class="val">${phone}</span></div>
+      ${bike ? `<div class="r-row"><span class="lbl">Bike</span><span class="val">${bike}</span></div>` : ""}
+      ${plate ? `<div class="r-row"><span class="lbl">Number plate</span><span class="val">${plate}</span></div>` : ""}
+      <div class="r-row"><span class="lbl">Date</span><span class="val">${dt}</span></div>
+    </div>
+    <div class="r-section">
+      <div class="r-sec-title">Kaam ki List</div>
+      ${worksHTML}
+    </div>
+    ${notes ? `<div class="r-section"><div class="r-sec-title">Notes</div><div style="font-size:14px;color:var(--text2)">${notes}</div></div>` : ""}
+    <div class="r-total">
+      <span>Total Amount</span>
+      <span class="t-val">₹${parseInt(amount || 0).toLocaleString("en-IN")}</span>
+    </div>
+  `;
+      }
+
+      function buildWAMsg(token, dt, name, bike, plate, amount, notes) {
+        let msg = `🔧 *Dinesh Bike Point*\n`;
+        msg += `📋 Receipt: *${token}*\n`;
+        msg += `📅 ${dt}\n\n`;
+        msg += `Namaste *${name}* ji! 🙏\n\n`;
+        if (bike || plate)
+          msg += `🏍️ *Bike:* ${bike}${plate ? " (" + plate + ")" : ""}\n\n`;
+        msg += `✅ *Kaam ki list:*\n`;
+        workItems.forEach((w, i) => (msg += `${i + 1}. ${w}\n`));
+        if (notes) msg += `\n📝 *Notes:* ${notes}\n`;
+        msg += `\n💰 *Total: ₹${parseInt(amount || 0).toLocaleString("en-IN")}*\n\n`;
+        msg += `Dinesh Bike Point mein service karwane ka shukriya! 😊\nDobara zarur aana!\n\n📞 9716307421 | 8816900576`;
+        return msg;
+      }
+
+      function sendWA() {
+        const url =
+          "https://wa.me/91" +
+          currentPhone +
+          "?text=" +
+          encodeURIComponent(currentWAMsg);
+        window.open(url, "_blank");
+      }
+
+      function newEntry() {
+        document.getElementById("cname").value = "";
+        document.getElementById("cphone").value = "";
+        document.getElementById("cbike").value = "";
+        document.getElementById("cplate").value = "";
+        document.getElementById("camount").value = "";
+        document.getElementById("cnotes").value = "";
+        document.getElementById("historyBar").style.display = "none";
+        workItems = [];
+        renderWork();
+        showPage("form");
+      }
+
+      function renderHistory() {
+        const q = (document.getElementById("searchInput").value || "")
+          .trim()
+          .toLowerCase();
+        const list = document.getElementById("historyList");
+        let filtered = [...records].reverse();
+        if (q)
+          filtered = filtered.filter(
+            (r) =>
+              r.name.toLowerCase().includes(q) ||
+              r.phone.includes(q) ||
+              (r.bike || "").toLowerCase().includes(q),
+          );
+        if (!filtered.length) {
+          list.innerHTML = `<div class="empty-state"><div class="e-icon">📭</div><p>${q ? "Koi record nahi mila" : "Abhi tak koi entry nahi hai"}</p></div>`;
+          return;
+        }
+        list.innerHTML = filtered
+          .map(
+            (r) => `
+    <div class="h-entry">
+      <div class="h-entry-top">
+        <div class="h-name">${r.name}</div>
+        <div class="h-token">${r.token}</div>
+      </div>
+      <div class="h-bike">${r.bike || "Bike N/A"}${r.plate ? " • " + r.plate : ""} • 📞 ${r.phone}</div>
+      <div class="h-works">🔧 ${r.works.join(" • ")}</div>
+      <div class="h-bottom">
+        <div class="h-date">📅 ${r.date}</div>
+        <div class="h-amt">₹${parseInt(r.amount || 0).toLocaleString("en-IN")}</div>
+      </div>
+    </div>
+  `,
+          )
+          .join("");
+      }
+
+      function showToast(msg) {
+        const t = document.getElementById("toast");
+        t.textContent = msg;
+        t.classList.add("show");
+        setTimeout(() => t.classList.remove("show"), 2500);
+      }
+    </script>
+  </body>
+</html>
