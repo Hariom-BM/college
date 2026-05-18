@@ -771,6 +771,54 @@
           oninput="renderHistory()"
         />
       </div>
+      <div
+        style="
+          display: flex;
+          align-items: flex-end;
+          gap: 10px;
+          margin-bottom: 1rem;
+        "
+      >
+        <div style="display: flex; flex-direction: column; gap: 4px; flex: 1">
+          <label style="font-size: 12px; color: var(--text3); font-weight: 500"
+            >Date filter (kisi din ki entries dekho)</label
+          >
+          <input
+            type="date"
+            id="dateFilter"
+            oninput="renderHistory()"
+            style="
+              border: 1px solid var(--border2);
+              border-radius: var(--radius-sm);
+              padding: 9px 12px;
+              font-size: 14px;
+              color: var(--text);
+              font-family: &quot;Baloo 2&quot;, sans-serif;
+              background: var(--surface);
+              outline: none;
+              width: 100%;
+            "
+          />
+        </div>
+        <button
+          onclick="printDaily()"
+          style="
+            background: var(--orange);
+            border: none;
+            color: #fff;
+            border-radius: var(--radius-sm);
+            padding: 10px 16px;
+            font-size: 14px;
+            font-family: &quot;Baloo 2&quot;, sans-serif;
+            font-weight: 700;
+            cursor: pointer;
+            white-space: nowrap;
+            flex-shrink: 0;
+          "
+        >
+          🖨️ PDF
+        </button>
+      </div>
       <div id="historyList"></div>
     </div>
 
@@ -1055,11 +1103,11 @@
         showPage("form");
       }
 
-      function renderHistory() {
+      function getFilteredRecords() {
         const q = (document.getElementById("searchInput").value || "")
           .trim()
           .toLowerCase();
-        const list = document.getElementById("historyList");
+        const dateVal = document.getElementById("dateFilter").value;
         let filtered = [...records].reverse();
         if (q)
           filtered = filtered.filter(
@@ -1068,17 +1116,41 @@
               r.phone.includes(q) ||
               (r.bike || "").toLowerCase().includes(q),
           );
+        if (dateVal) {
+          const [y, m, d] = dateVal.split("-");
+          const label = d + "/" + m + "/" + y;
+          filtered = filtered.filter((r) => r.date && r.date.startsWith(label));
+        }
+        return filtered;
+      }
+
+      function renderHistory() {
+        const list = document.getElementById("historyList");
+        const filtered = getFilteredRecords();
+        const dateVal = document.getElementById("dateFilter").value;
+        const q = (document.getElementById("searchInput").value || "").trim();
         if (!filtered.length) {
-          list.innerHTML = `<div class="empty-state"><div class="e-icon">📭</div><p>${q ? "Koi record nahi mila" : "Abhi tak koi entry nahi hai"}</p></div>`;
+          list.innerHTML = `<div class="empty-state"><div class="e-icon">📭</div><p>${q || dateVal ? "Koi record nahi mila" : "Abhi tak koi entry nahi hai"}</p></div>`;
           return;
         }
-        list.innerHTML = filtered
-          .map(
-            (r) => `
+        const total = filtered.reduce((s, r) => s + parseInt(r.amount || 0), 0);
+        list.innerHTML =
+          `
+    <div style="background:var(--orange-light);border:1px solid rgba(232,71,10,0.25);border-radius:var(--radius-sm);padding:10px 14px;margin-bottom:12px;display:flex;justify-content:space-between;align-items:center;">
+      <span style="font-size:13px;color:var(--text2);font-weight:500;">📊 ${filtered.length} entries</span>
+      <span style="font-size:15px;font-weight:700;color:var(--orange-dark);">Total: ₹${total.toLocaleString("en-IN")}</span>
+    </div>
+  ` +
+          filtered
+            .map(
+              (r) => `
     <div class="h-entry">
       <div class="h-entry-top">
         <div class="h-name">${r.name}</div>
-        <div class="h-token">${r.token}</div>
+        <div style="display:flex;align-items:center;gap:8px;">
+          <div class="h-token">${r.token}</div>
+          <button onclick="deleteEntry('${r.token}')" style="background:none;border:1px solid #F09595;border-radius:7px;color:#A32D2D;font-size:13px;padding:3px 9px;cursor:pointer;font-family:'Baloo 2',sans-serif;font-weight:600;">🗑️ Hatao</button>
+        </div>
       </div>
       <div class="h-bike">${r.bike || "Bike N/A"}${r.plate ? " • " + r.plate : ""} • 📞 ${r.phone}</div>
       <div class="h-works">🔧 ${r.works.join(" • ")}</div>
@@ -1088,8 +1160,91 @@
       </div>
     </div>
   `,
+            )
+            .join("");
+      }
+
+      function deleteEntry(token) {
+        if (!confirm(token + " — yeh entry delete karni hai?")) return;
+        records = records.filter((r) => r.token !== token);
+        save();
+        renderHistory();
+        showToast("🗑️ Entry delete ho gayi");
+      }
+
+      function printDaily() {
+        const filtered = getFilteredRecords();
+        const dateVal = document.getElementById("dateFilter").value;
+        let dateLabel = "Sab Entries";
+        if (dateVal) {
+          const [y, m, d] = dateVal.split("-");
+          dateLabel = d + "/" + m + "/" + y;
+        }
+        if (!filtered.length) {
+          showToast("❌ Koi entry nahi mili print ke liye");
+          return;
+        }
+        const total = filtered.reduce((s, r) => s + parseInt(r.amount || 0), 0);
+        const rows = filtered
+          .map(
+            (r, i) => `
+    <tr>
+      <td>${i + 1}</td>
+      <td>${r.token}</td>
+      <td>${r.name}</td>
+      <td>${r.phone}</td>
+      <td>${r.bike || "-"}${r.plate ? " (" + r.plate + ")" : ""}</td>
+      <td>${r.works.join(", ")}</td>
+      <td style="text-align:right;font-weight:600;">&#8377;${parseInt(r.amount || 0).toLocaleString("en-IN")}</td>
+      <td>${r.date}</td>
+    </tr>
+  `,
           )
           .join("");
+        const html = `<!DOCTYPE html><html><head><meta charset="UTF-8">
+  <title>Dinesh Bike Point</title>
+  <style>
+    body{font-family:Arial,sans-serif;padding:20px;color:#111;margin:0;}
+    h2{text-align:center;font-size:20px;margin-bottom:2px;}
+    .sub{text-align:center;font-size:13px;color:#666;margin-bottom:4px;}
+    .date-label{text-align:center;font-size:15px;font-weight:700;margin-bottom:16px;color:#C03808;}
+    table{width:100%;border-collapse:collapse;font-size:12px;}
+    th{background:#E8470A;color:#fff;padding:8px 6px;text-align:left;}
+    td{border-bottom:1px solid #eee;padding:7px 6px;vertical-align:top;}
+    tr:nth-child(even) td{background:#FDF0EB;}
+    .footer{margin-top:16px;display:flex;justify-content:space-between;align-items:center;font-size:13px;}
+    .total-box{background:#E8470A;color:#fff;padding:10px 20px;border-radius:8px;font-size:16px;font-weight:700;}
+    @media print{@page{margin:10mm;}}
+  </style></head><body>
+  <h2>Dinesh Bike Point</h2>
+  <div class="sub">9716307421 | 8816900576 &nbsp; Service &amp; Repair</div>
+  <div class="date-label">${dateLabel} - Daily Report</div>
+  <table>
+    <thead><tr><th>#</th><th>Token</th><th>Customer</th><th>Mobile</th><th>Bike</th><th>Kaam</th><th>Amount</th><th>Time</th></tr></thead>
+    <tbody>${rows}</tbody>
+  </table>
+  <div class="footer">
+    <span style="color:#666;">Total entries: ${filtered.length}</span>
+    <div class="total-box">Total: &#8377;${total.toLocaleString("en-IN")}</div>
+  </div>
+  `;
+
+        let iframe = document.getElementById("printFrame");
+        if (!iframe) {
+          iframe = document.createElement("iframe");
+          iframe.id = "printFrame";
+          iframe.style.cssText =
+            "position:fixed;top:-9999px;left:-9999px;width:1px;height:1px;border:none;";
+          document.body.appendChild(iframe);
+        }
+        const doc = iframe.contentWindow.document;
+        doc.open();
+        doc.write(html);
+        doc.close();
+        setTimeout(function () {
+          iframe.contentWindow.focus();
+          iframe.contentWindow.print();
+        }, 500);
       }
 
       function showToast(msg) {
