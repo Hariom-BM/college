@@ -1,6 +1,11 @@
 # Ignore local dependency installation
 node_modules/
 
+# Ignore build/output directories
+output/
+build/
+dist/
+
 # Ignore logs
 *.log
 npm-debug.log*
@@ -8,3 +13,10 @@ npm-debug.log*
 # Ignore local OS files
 .DS_Store
 Thumbs.db
+
+# Ignore editor files
+.vscode/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
