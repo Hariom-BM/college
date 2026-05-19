@@ -23,4 +23,5 @@ const h4=React.createElement('h4',{'className': 'my-h4'},
     )),
 );
 const root=ReactDOM.createRoot(document.querySelector('#root'));
+
 root.render(h4);
