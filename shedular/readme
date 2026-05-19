@@ -16,7 +16,7 @@ Understanding automation and scheduling (e.g., Cron Jobs).
 To run this project, you need to follow a few simple steps.
 
 1. Get the Slack Webhook URL
-Go to the Slack API Website.
+   Go to the Slack API Website.
 
 Create a new Slack app.
 
@@ -27,7 +27,7 @@ Click on "Add New Webhook to Workspace" and choose the channel where you want to
 Copy the Webhook URL.
 
 2. Get the Google Generative AI API Key
-You will need an API key if you are running this project on your local computer.
+   You will need an API key if you are running this project on your local computer.
 
 Go to the Google Cloud Console.
 
@@ -38,7 +38,7 @@ Enable the "Generative Language API".
 In the "Credentials" section, create a new API key.
 
 3. Run the Project
-Create the project file (e.g., motivator.js).
+   Create the project file (e.g., motivator.js).
 
 In your terminal, run this command to install the Axios library:
 
@@ -47,7 +47,8 @@ npm install axios
 In your motivator.js file, update the slackWebhookUrl and API_KEY:
 
 const slackWebhookUrl = "Your Slack Webhook URL";
-const API_KEY = "Your Google API Key"; // Only for local use
+
+<!-- const API_KEY = "Your Google API Key"; // Only for local use -->
 
 Run the script:
 
@@ -59,17 +60,10 @@ To have the script run automatically every morning, you can use your operating s
 On Linux/macOS: Cron Job
 In the terminal, run crontab -e and add this line (adjust your path accordingly):
 
-0 10 * * * /usr/bin/node /path/to/your/script/motivator.js
+0 10 \* \* \* /usr/bin/node /path/to/your/script/motivator.js
 
 On Windows: Task Scheduler
 Use the Task Scheduler to create a new task that runs the node motivator.js command every morning at 10:00 AM.
 
 👨‍💻 Contribution
 If you would like to improve this project, please submit a pull request. New ideas, bug fixes, or suggestions to improve the code are welcome!
-
-
-for API
-https://console.cloud.google.com/apis/credentials?inv=1&invt=Ab56mw&project=messagelogger-466017
-
-for slack api
-https://api.slack.com/apps/A09B4UE5FL6/incoming-webhooks?success=1
