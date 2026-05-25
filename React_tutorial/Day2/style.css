@@ -1,0 +1,42 @@
+   .card {
+       max-width: 300px;
+       background: white;
+       border-radius: 12px;
+       overflow: hidden;
+       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+   }
+
+   .card img {
+       width: 100%;
+       display: block;
+   }
+
+   .card-content {
+       padding: 16px;
+   }
+
+   .card h2 {
+       margin-top: 0;
+       font-size: 1.4rem;
+   }
+
+   .card p {
+       color: #555;
+       line-height: 1.5;
+   }
+
+   .card a {
+       display: inline-block;
+       margin-top: 12px;
+       padding: 10px 16px;
+       background: #0077ff;
+       color: white;
+       text-decoration: none;
+       border-radius: 6px;
+   }
+
+   .card a:focus,
+   .card a:hover {
+       background: #005fcc;
+       outline: 3px solid #99c2ff;
+   }

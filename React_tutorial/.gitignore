@@ -1,0 +1,10 @@
+# Ignore local dependency installation
+node_modules/
+
+# Ignore logs
+*.log
+npm-debug.log*
+
+# Ignore local OS files
+.DS_Store
+Thumbs.db
